@@ -1,12 +1,10 @@
-## Introvertia Social Media
+## Introvertia - A Community Platform
 
-Introvertia is a fully functional social media platform with multiple features built with NextJS.
-
-Leave a star if you like what you see ⭐
+A fully functional community platform with multiple features built with NextJS.
 
 ## Key Features
 
-### Core Social Features
+### Features
 - **Real-time Messaging** - Instant chat with Socket.io integration
 - **Stories & Posts** - Share moments with 24-hour expiring stories and permanent posts
 - **Friend Management** - Send and manage friend requests, build your network
