@@ -82,22 +82,22 @@ const UserInfoCardInteraction = ({
         <button
           onClick={onToggleFollow}
           disabled={!!isProcessing}
-          className="px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-xs disabled:opacity-50 flex items-center gap-1"
-          title="Unfollow"
+          className="px-3 py-1.5 rounded-lg bg-zinc-700 hover:bg-zinc-600 text-white text-xs disabled:opacity-50 flex items-center gap-1"
+          title="Bỏ theo dõi"
         >
           <UserMinus className="w-4 h-4" />
-          <span className="hidden sm:inline">Unfollow</span>
+          <span className="hidden sm:inline">Bỏ theo dõi</span>
         </button>
       )}
 
       <button
         onClick={onFollow}
         disabled={!!isProcessing}
-        className="px-3 py-1.5 rounded-lg bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 text-zinc-700 dark:text-zinc-200 text-xs disabled:opacity-50 flex items-center gap-1"
-        title={requestSent ? "Cancel request" : "Send request"}
+        className="px-3 py-1.5 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-white text-xs disabled:opacity-50 flex items-center gap-1"
+        title={requestSent ? "Hủy lời mời" : "Gửi lời mời"}
       >
         {requestSent ? <SquareX className="w-4 h-4" /> : <UserPlus className="w-4 h-4" />}
-        <span className="hidden sm:inline">{requestSent ? "Cancel" : "Request"}</span>
+        <span className="hidden sm:inline">{requestSent ? "Hủy" : "Kết bạn"}</span>
       </button>
 
       {/* Block/Unblock */}
@@ -105,10 +105,10 @@ const UserInfoCardInteraction = ({
         onClick={onToggleBlock}
         disabled={!!isProcessing}
         className="px-3 py-1.5 rounded-lg bg-red-600 hover:bg-red-700 text-white text-xs disabled:opacity-50 flex items-center gap-1"
-        title={blocked ? "Unblock" : "Block"}
+        title={blocked ? "Bỏ chặn" : "Chặn"}
       >
         {blocked ? <Check className="w-4 h-4" /> : <Ban className="w-4 h-4" />}
-        <span className="hidden sm:inline">{blocked ? "Unblock" : "Block"}</span>
+        <span className="hidden sm:inline">{blocked ? "Bỏ chặn" : "Chặn"}</span>
       </button>
     </div>
   );

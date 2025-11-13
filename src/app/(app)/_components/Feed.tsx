@@ -138,7 +138,7 @@ const Feed = ({ username }: FeedProps) => {
           <div 
             key={post.id} 
             ref={index === posts.length - 1 ? lastPostElementRef : null}
-            className="mb-4 bg-zinc-900/80 backdrop-blur-sm rounded-xl border border-zinc-800/50"
+            className="mb-6 bg-zinc-900/80 backdrop-blur-sm rounded-xl border border-zinc-800/50"
           >
             <Post post={post}/>
           </div>

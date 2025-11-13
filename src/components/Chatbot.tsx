@@ -130,7 +130,7 @@ export default function Chatbot() {
               </div>
               <div>
                 <h2 className="text-base font-semibold text-white">AI hỗ trợ</h2>
-                <p className="text-xs text-zinc-400">Introvertia AI</p>
+                <p className="text-xs text-zinc-400">Commun AI</p>
               </div>
             </>
           )}

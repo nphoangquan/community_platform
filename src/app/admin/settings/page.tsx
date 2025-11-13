@@ -56,7 +56,7 @@ export default async function SettingsPage() {
                 <input
                   type="text"
                   id="site-name"
-                  defaultValue="Introvertia"
+                  defaultValue="Commun"
                   className="w-full px-3 py-2 border border-zinc-200 dark:border-zinc-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 dark:bg-zinc-800"
                 />
               </div>

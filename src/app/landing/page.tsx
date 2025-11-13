@@ -4,8 +4,8 @@ import { Users, Shield, MessageSquare, Heart, Menu, ArrowRight, Star, ChevronRig
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "Introvertia - Connect With Us",
-  description: "A social platform designed by Nguyen Phan Hoang Quan."
+  title: "Commun - Community Platform",
+  description: "A community platform designed by Nguyen Phan Hoang Quan."
 }
 
 export default function LandingPage() {
@@ -24,14 +24,14 @@ export default function LandingPage() {
             <div className="relative w-10 h-10 rounded-md overflow-hidden transition-transform duration-500 group-hover:scale-110">
               <Image
                 src="/introvertia-icon.png"
-                alt="Introvertia Logo"
+                alt="Commun Logo"
                 fill
                 className="object-cover transition-all duration-700"
               />
               <div className="absolute inset-0 bg-gradient-to-tr from-emerald-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             </div>
             <span className="text-emerald-400 font-bold text-2xl relative">
-              INTROVERTIA
+              COMMUN
               <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-emerald-400/50 group-hover:w-full transition-all duration-500"></span>
             </span>
           </div>
@@ -44,7 +44,7 @@ export default function LandingPage() {
               className="group relative px-5 py-2.5 bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-black rounded-lg transition-all duration-300 overflow-hidden"
             >
               <span className="relative z-10 flex items-center gap-1 font-medium">
-                Visit Introvertia
+                Visit Commun
                 <ArrowRight className="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" />
               </span>
               <div className="absolute inset-0 w-full h-full bg-white/20 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
@@ -106,7 +106,7 @@ export default function LandingPage() {
             <div className="relative z-10 rounded-2xl overflow-hidden transform transition-all duration-700 hover:scale-[1.03] hover:-rotate-1">
               <Image
                 src="/itv_second.png"
-                alt="INTROVERTIA App Interface"
+                alt="Commun App Interface"
                 width={600}
                 height={600}
                 className="rounded-2xl"
@@ -138,7 +138,7 @@ export default function LandingPage() {
               Features
             </div>
             <h2 className="text-3xl md:text-5xl font-bold mb-6">
-              Why Choose <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-emerald-500">INTROVERTIA</span>
+              Why Choose <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-emerald-500">COMMUN</span>
             </h2>
             <p className="text-zinc-400 max-w-2xl mx-auto">
               Thiết kế dựa trên nhu cầu của người dùng.
@@ -172,7 +172,7 @@ export default function LandingPage() {
               Process
             </div>
             <h2 className="text-3xl md:text-5xl font-bold mb-6">
-              How <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-emerald-500">INTROVERTIA</span> Works
+              How <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-emerald-500">COMMUN</span> Works
             </h2>
             <p className="text-zinc-400 max-w-2xl mx-auto">
               {/* Our platform makes it easy to connect with like-minded individuals while respecting your boundaries. */}
@@ -202,7 +202,7 @@ export default function LandingPage() {
               <div className="relative z-10 rounded-2xl overflow-hidden transform transition-all duration-700 hover:scale-[1.03] hover:rotate-1">
                 <Image
                   src="/itv_first.png"
-                  alt="How INTROVERTIA Works"
+                  alt="How Commun Works"
                   width={600}
                   height={600}
                   className="rounded-2xl"
@@ -278,7 +278,7 @@ export default function LandingPage() {
                   href="/" 
                   className="group relative inline-flex items-center justify-center gap-2 bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-black text-lg px-10 py-4 rounded-xl font-medium overflow-hidden"
                 >
-                  <span className="relative z-10">Join Introvertia Now</span>
+                  <span className="relative z-10">Join Commun Now</span>
                   <ArrowRight className="relative z-10 w-5 h-5 transform group-hover:translate-x-1 transition-transform duration-300" />
                   <div className="absolute inset-0 w-full h-full bg-white/20 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
                 </Link>
@@ -302,7 +302,7 @@ export default function LandingPage() {
               <div className="relative w-10 h-10 rounded-md overflow-hidden transition-transform duration-500 group-hover:scale-110">
                 <Image
                   src="/introvertia-icon.png"
-                  alt="Introvertia Logo"
+                  alt="Commun Logo"
                   fill
                   className="object-cover transition-all duration-700"
                 />
@@ -322,10 +322,10 @@ export default function LandingPage() {
               href="/"
               className="inline-block border border-emerald-400/50 text-emerald-400 hover:bg-emerald-400/10 px-6 py-2.5 rounded-lg text-center font-medium transition-colors duration-300"
             >
-              Return to Introvertia
+              Return to Commun
             </Link>
             <p className="text-zinc-500 text-sm mt-8">
-              © {new Date().getFullYear()} INTROVERTIA. All rights reserved.
+              © {new Date().getFullYear()} COMMUN. All rights reserved.
             </p>
           </div>
         </div>

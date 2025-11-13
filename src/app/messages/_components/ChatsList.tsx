@@ -112,7 +112,7 @@ export default function ChatsList({ userId, activeChatId, initialChats = [] }: C
   return (
     <div className="h-full flex flex-col">
       <div className="p-4 border-b border-zinc-800 flex items-center justify-between h-[68px]">
-        <h2 className="text-xl font-semibold bg-gradient-to-r from-emerald-400 to-emerald-600 bg-clip-text text-transparent">Messages</h2>
+        <h2 className="text-xl font-semibold text-white">Tin nhắn</h2>
         <NewChatDialog userId={userId} />
       </div>
       
@@ -120,8 +120,8 @@ export default function ChatsList({ userId, activeChatId, initialChats = [] }: C
         {chats.length === 0 && !loading ? (
           <div className="flex flex-col items-center justify-center h-full text-center p-4">
             <MessageSquarePlus className="w-12 h-12 text-zinc-500 mb-2" />
-            <p className="text-zinc-500 mb-1">No messages</p>
-            <p className="text-zinc-600 text-sm max-w-xs">Start a conversation - Bắt đầu cuộc trò chuyện</p>
+            <p className="text-zinc-400 mb-1">Chưa có tin nhắn</p>
+            <p className="text-zinc-500 text-sm max-w-xs">Bắt đầu cuộc trò chuyện mới</p>
           </div>
         ) : (
           <div className="space-y-1 py-2">

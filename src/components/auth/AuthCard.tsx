@@ -19,7 +19,7 @@ export default function AuthCard({ title, description, children }: AuthCardProps
           <div className="absolute inset-0 rounded-full bg-gradient-to-br from-emerald-500/20 to-purple-500/20 -z-10 group-hover:from-emerald-500/30 group-hover:to-purple-500/30 transition-all duration-500"></div>
           <Image 
             src="/introvertia-icon.png" 
-            alt="Introvertia Logo" 
+            alt="Commun Logo" 
             fill
             className="object-contain p-2"
           />

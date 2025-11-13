@@ -1,4 +1,4 @@
-const IntrovertiaIcon = ({ className = "" }: { className?: string }) => {
+const CommunIcon = ({ className = "" }: { className?: string }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -15,6 +15,5 @@ const IntrovertiaIcon = ({ className = "" }: { className?: string }) => {
   );
 };
 
-export default IntrovertiaIcon;
-
+export default CommunIcon;
 

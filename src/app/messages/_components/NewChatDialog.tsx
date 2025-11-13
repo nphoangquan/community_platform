@@ -51,18 +51,10 @@ export default function NewChatDialog({ userId }: NewChatDialogProps) {
     <>
       <button
         onClick={() => setIsOpen(true)}
-        className="p-2 rounded-full hover:bg-zinc-800/50 transition-colors relative group"
-        title="New message"
+        className="p-2 rounded-lg hover:bg-zinc-800/50 transition-colors"
+        title="Tạo tin nhắn mới"
       >
-        <div className="relative">
-          <Plus className="w-5 h-5 text-white transition-opacity duration-200" />
-          <Plus className="w-5 h-5 absolute inset-0 text-transparent bg-gradient-to-r from-emerald-400 to-emerald-600 bg-clip-text opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
-        </div>
-        
-        {/* Hover highlight với shimmer */}
-        <div className="absolute inset-0 bg-emerald-500/10 opacity-0 rounded-full group-hover:opacity-100 overflow-hidden transition-opacity duration-200 -z-10">
-          <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-emerald-100/20 to-transparent -translate-x-full group-hover:animate-shimmer"></div>
-        </div>
+        <Plus className="w-5 h-5 text-zinc-400 hover:text-white transition-colors" />
       </button>
 
       {isOpen && (

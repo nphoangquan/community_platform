@@ -62,17 +62,17 @@ export default function TranslateButton({
         onClick={isTranslated ? onReset : () => setShowLanguages(!showLanguages)}
         disabled={loading}
         className={`flex items-center gap-1 ${textSize} font-medium 
-          ${loading ? 'text-zinc-400 dark:text-zinc-500 cursor-not-allowed' : 
-          'text-emerald-600 dark:text-emerald-500 hover:underline'} 
+          ${loading ? 'text-zinc-400 cursor-not-allowed' : 
+          'text-zinc-300 hover:text-white hover:underline'} 
           focus:outline-none transition-colors`}
         aria-haspopup="true"
       >
         <Languages className={iconSize} />
         {loading 
-          ? "Translating..." 
+          ? "Đang dịch..." 
           : isTranslated 
-            ? "Show original" 
-            : "Translate"}
+            ? "Hiện bản gốc" 
+            : "Dịch"}
       </button>
       
       {showLanguages && !isTranslated && (

@@ -5,7 +5,7 @@ import { authAppearance } from "@/components/auth/authAppearance";
 export default function Page() {
   return (
     <AuthCard 
-      title="Introvertia"
+      title="Commun"
       description="Tạo tài khoản"
     >
       <div className="px-7 py-8 animate-scaleIn">

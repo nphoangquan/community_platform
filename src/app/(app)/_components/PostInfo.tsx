@@ -71,10 +71,10 @@ const PostInfo = ({ post, currentUserId }: { post: PostWithUserAndComments; curr
           ref={buttonRef}
           type="button"
           onClick={() => setOpen((prev) => !prev)}
-          className="p-1 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-full transition-colors cursor-pointer"
+          className="p-1 hover:bg-zinc-800 rounded-lg transition-colors cursor-pointer"
           aria-label="Post options"
         >
-          <MoreVertical className="w-5 h-5 text-zinc-500 dark:text-zinc-400 hover:text-emerald-500 dark:hover:text-emerald-400 transition-colors" />
+          <MoreVertical className="w-5 h-5 text-zinc-400 hover:text-white transition-colors" />
         </button>
         
         {open && (
@@ -91,7 +91,7 @@ const PostInfo = ({ post, currentUserId }: { post: PostWithUserAndComments; curr
               type="button"
             >
               <Eye className="w-4 h-4 text-white group-hover:text-zinc-300 transition-colors" />
-              <span className="text-white group-hover:text-zinc-300 transition-colors">View details</span>
+              <span className="text-white group-hover:text-zinc-300 transition-colors">Xem chi tiết</span>
             </button>
             
             {isOwner && (
@@ -104,8 +104,8 @@ const PostInfo = ({ post, currentUserId }: { post: PostWithUserAndComments; curr
                   }}
                   type="button"
                 >
-                  <Edit className="w-4 h-4 text-white group-hover:text-emerald-500 transition-colors" />
-                  <span className="text-white group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r from-emerald-500 via-emerald-400 to-emerald-500 animate-gradient-slow bg-[length:200%_auto]">Edit</span>
+                  <Edit className="w-4 h-4 text-white group-hover:text-zinc-300 transition-colors" />
+                  <span className="text-white group-hover:text-zinc-300 transition-colors">Chỉnh sửa</span>
                 </button>
                 
                 <button 
@@ -114,7 +114,7 @@ const PostInfo = ({ post, currentUserId }: { post: PostWithUserAndComments; curr
                   onClick={handleDeleteClick}
                 >
                   <Trash2 className="w-4 h-4 text-red-500 group-hover:text-red-400 transition-colors" />
-                  <span className="text-red-500 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r from-red-500 via-red-400 to-red-500 animate-gradient-slow bg-[length:200%_auto]">Delete</span>
+                  <span className="text-red-500 group-hover:text-red-400 transition-colors">Xóa</span>
                 </button>
               </>
             )}
@@ -129,8 +129,8 @@ const PostInfo = ({ post, currentUserId }: { post: PostWithUserAndComments; curr
                 type="button"
               >
                 <Flag className="w-4 h-4 text-yellow-500 group-hover:text-yellow-400 transition-colors" />
-                <span className="text-white group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r from-yellow-500 via-yellow-400 to-yellow-500 animate-gradient-slow bg-[length:200%_auto]">
-                  Report
+                <span className="text-white group-hover:text-zinc-300 transition-colors">
+                  Báo cáo
                 </span>
               </button>
             )}

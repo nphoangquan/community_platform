@@ -523,7 +523,7 @@ function CommentList({
                   type="button"
                   onClick={handleDeleteComment}
                   className="text-xs text-red-500 hover:text-red-600 dark:text-red-400 dark:hover:text-red-300 transition-colors"
-                  title="Delete comment"
+                  title="Xóa bình luận"
                 >
                   <Trash2 className="w-3 h-3" />
                 </button>
@@ -550,12 +550,12 @@ function CommentList({
                   <input type="hidden" name="parentId" value={comment.id} />
                   <input
                     name="comment"
-                    placeholder={`Reply to ${comment.user.name || comment.user.username}...`}
+                    placeholder={`Trả lời ${comment.user.name || comment.user.username}...`}
                     className="flex-1 bg-zinc-100 dark:bg-zinc-800/50 rounded-lg px-3 py-2 text-sm outline-none focus:ring-1 ring-emerald-500/20 placeholder:text-zinc-400 dark:placeholder:text-zinc-500 text-zinc-600 dark:text-zinc-300"
                   />
                   <button
                     type="submit"
-                    aria-label="Send reply"
+                    aria-label="Gửi phản hồi"
                     className="shrink-0 px-3 py-2 bg-emerald-500 text-white rounded-lg hover:bg-emerald-600 transition-colors"
                   >
                     <Send className="w-4 h-4 cursor-pointer" />
@@ -578,7 +578,7 @@ function CommentList({
                     className="text-xs text-zinc-500 hover:text-emerald-500 dark:text-zinc-400 dark:hover:text-emerald-400 transition-colors cursor-pointer flex items-center gap-1"
                   >
                     <MessageCircle className="w-3 h-3" />
-                    <span>View {comment.replies.length - 1} more {comment.replies.length - 1 === 1 ? 'reply' : 'replies'}</span>
+                    <span>Xem thêm {comment.replies.length - 1} {comment.replies.length - 1 === 1 ? 'phản hồi' : 'phản hồi'}</span>
                   </button>
                 )}
               </div>
@@ -613,7 +613,7 @@ function CommentList({
             />
             <button
               type="submit"
-              aria-label="Send comment"
+              aria-label="Gửi bình luận"
               className="shrink-0 px-3 py-2 bg-emerald-500 text-white rounded-lg hover:bg-emerald-600 transition-colors"
             >
               <Send className="w-4 h-4 cursor-pointer" />

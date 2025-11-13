@@ -9,23 +9,19 @@ export default async function StoriesPage() {
 
   if (!stories || stories.length === 0) {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-gradient-to-b from-zinc-900 to-zinc-950 rounded-lg">
-        <div className="relative p-8 bg-zinc-900/30 backdrop-blur-md rounded-3xl max-w-md w-full border border-zinc-800/50 shadow-xl">
-          <div className="absolute -top-6 -right-6 w-12 h-12 bg-gradient-to-br from-blue-500 to-violet-500 rounded-xl transform rotate-12"></div>
-          <div className="absolute -bottom-4 -left-4 w-8 h-8 bg-gradient-to-tr from-emerald-500 to-cyan-500 rounded-lg transform -rotate-12"></div>
-          
-          <div className="text-center relative z-10">
-            <div className="mb-6 relative">
-              <div className="w-20 h-20 mx-auto rounded-full bg-zinc-800/80 border border-zinc-700/50 flex items-center justify-center shadow-inner">
-                <div className="absolute inset-0 rounded-full bg-gradient-to-r from-emerald-500/10 to-blue-500/10 animate-pulse"></div>
+      <div className="flex items-center justify-center min-h-screen bg-zinc-950 rounded-lg">
+        <div className="relative p-8 bg-zinc-900/80 backdrop-blur-sm rounded-2xl max-w-md w-full border border-zinc-800/50">
+          <div className="text-center">
+            <div className="mb-6">
+              <div className="w-20 h-20 mx-auto rounded-full bg-zinc-800 border border-zinc-700 flex items-center justify-center">
                 <Plus className="w-8 h-8 text-white" />
               </div>
             </div>
-            <h1 className="text-2xl font-bold text-white mb-2">STORIES</h1>
+            <h1 className="text-2xl font-bold text-white mb-2">Stories</h1>
             <p className="text-zinc-400 mb-8">Chia sẻ khoảnh khắc của bạn với bạn bè bằng cách tạo story</p>
             <Link 
               href="/stories/create" 
-              className="px-6 py-3 bg-gradient-to-r from-emerald-500 to-cyan-500 hover:from-emerald-600 hover:to-cyan-600 text-white rounded-xl font-medium inline-flex items-center gap-2 transition-all shadow-lg shadow-emerald-500/20 hover:shadow-emerald-500/30 hover:scale-[1.02]"
+              className="px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg font-medium inline-flex items-center gap-2 transition-colors"
             >
               <Sparkles className="w-4 h-4" />
               <span>Tạo Story</span>
@@ -37,22 +33,14 @@ export default async function StoriesPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-zinc-900 to-zinc-950 flex rounded-lg">
+    <div className="min-h-screen bg-zinc-950 flex rounded-lg">
       <div className="hidden md:block">
         <StoryList stories={stories} />
       </div>
       <div className="flex-1 flex flex-col items-center justify-center p-4">
-        <div className="relative p-8 bg-zinc-900/30 backdrop-blur-md rounded-3xl max-w-md w-full border border-zinc-800/50 shadow-xl overflow-hidden">
-          {/* Decorative elements */}
-          <div className="absolute -top-20 -right-20 w-40 h-40 bg-blue-500/10 rounded-full blur-3xl"></div>
-          <div className="absolute -bottom-20 -left-20 w-40 h-40 bg-emerald-500/10 rounded-full blur-3xl"></div>
-          
-          <div className="relative z-10">
-            <div className="flex items-center justify-center mb-2">
-              <div className="h-1 w-10 bg-gradient-to-r from-emerald-500 to-blue-500 rounded-full mr-3"></div>
-              <h1 className="text-2xl font-bold text-white tracking-tight">Stories</h1>
-              <div className="h-1 w-10 bg-gradient-to-r from-blue-500 to-emerald-500 rounded-full ml-3"></div>
-            </div>
+        <div className="relative p-8 bg-zinc-900/80 backdrop-blur-sm rounded-2xl max-w-md w-full border border-zinc-800/50">
+          <div>
+            <h1 className="text-2xl font-bold text-white text-center mb-2">Stories</h1>
             
             <p className="text-zinc-400 text-center text-sm mb-8">
               Chọn story từ danh sách hoặc tạo story
@@ -60,9 +48,9 @@ export default async function StoriesPage() {
             
             {/* Phần Featured story preview */}
             {stories[0] && (
-              <div className="mb-8 relative group">
-                <div className="w-full h-48 rounded-xl overflow-hidden mb-3 relative group-hover:shadow-lg group-hover:shadow-blue-500/10 transition-all">
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10"></div>
+              <div className="mb-8">
+                <div className="w-full h-48 rounded-xl overflow-hidden mb-3 relative">
+                  <div className="absolute inset-0 bg-black/40 z-10"></div>
                   
                   {stories[0].video ? (
                     <div className="relative w-full h-full">
@@ -72,10 +60,10 @@ export default async function StoriesPage() {
                         loop
                         autoPlay
                         playsInline
-                        className="object-cover w-full h-full transition-transform group-hover:scale-105 duration-500"
+                        className="object-cover w-full h-full"
                       />
                       <div className="absolute top-3 right-3 z-20">
-                        <Film className="w-5 h-5 text-white/80" />
+                        <Film className="w-5 h-5 text-white" />
                       </div>
                     </div>
                   ) : (
@@ -83,12 +71,12 @@ export default async function StoriesPage() {
                       src={stories[0].img || "/placeholder.png"}
                       alt="Featured story"
                       fill
-                      className="object-cover transition-transform group-hover:scale-105 duration-500"
+                      className="object-cover"
                     />
                   )}
                   
                   <div className="absolute bottom-3 left-3 z-10 flex items-center">
-                    <div className="w-8 h-8 rounded-full overflow-hidden mr-2 ring-2 ring-white/20">
+                    <div className="w-8 h-8 rounded-full overflow-hidden mr-2 ring-2 ring-zinc-800">
                       <Image 
                         src={stories[0].user.avatar || "/placeholder.png"}
                         alt={stories[0].user.username || "User"}
@@ -108,14 +96,14 @@ export default async function StoriesPage() {
             <div className="flex justify-center gap-4">
               <Link 
                 href={`/story/${stories[0].id}`} 
-                className="px-6 py-3 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white rounded-xl font-medium inline-flex items-center gap-2 transition-all shadow-lg shadow-blue-500/20 hover:shadow-blue-500/30 hover:scale-[1.02] flex-1 justify-center"
+                className="px-6 py-3 bg-zinc-800 hover:bg-zinc-700 text-white rounded-lg font-medium inline-flex items-center gap-2 transition-colors flex-1 justify-center"
               >
                 <Clock className="w-4 h-4" />
                 <span>Xem Mới Nhất</span>
               </Link>
               <Link 
                 href="/stories/create" 
-                className="px-6 py-3 bg-gradient-to-r from-emerald-500 to-cyan-500 hover:from-emerald-600 hover:to-cyan-600 text-white rounded-xl font-medium inline-flex items-center gap-2 transition-all shadow-lg shadow-emerald-500/20 hover:shadow-emerald-500/30 hover:scale-[1.02] flex-1 justify-center"
+                className="px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg font-medium inline-flex items-center gap-2 transition-colors flex-1 justify-center"
               >
                 <Sparkles className="w-4 h-4" />
                 <span>Tạo Mới</span>

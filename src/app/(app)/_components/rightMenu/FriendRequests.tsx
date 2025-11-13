@@ -23,7 +23,7 @@ const FriendRequests = async () => {
   return (
     <div className="p-6 bg-zinc-900/80 backdrop-blur-sm rounded-2xl border border-zinc-800/50 text-sm">
       <div className="flex items-center justify-between text-zinc-400 font-medium mb-5">
-        <span className="text-xs uppercase tracking-wider font-semibold">Friend Requests</span>
+        <span className="text-xs uppercase tracking-wider font-semibold">Lời mời kết bạn</span>
         <MoreVertical className="w-4 h-4 cursor-pointer hover:text-zinc-300 transition-colors" />
       </div>
       
@@ -32,7 +32,7 @@ const FriendRequests = async () => {
         
         <Link href="/friend-requests" className="block">
           <button className="bg-zinc-800 hover:bg-zinc-700 text-white p-3 text-xs rounded-lg transition-colors font-medium w-full">
-            See all requests
+            Xem tất cả lời mời
           </button>
         </Link>
       </div>

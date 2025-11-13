@@ -43,13 +43,13 @@ const ProfileCard = async () => {
           <div className="py-1.5 px-3 bg-zinc-800/50 rounded-lg border border-zinc-700/50 flex items-center gap-1.5">
             <Users className="w-3.5 h-3.5 text-zinc-400" />
             <span className="font-medium text-zinc-300">{user._count.followers}</span>
-            <span className="text-zinc-400">Followers</span>
+            <span className="text-zinc-400">Người theo dõi</span>
           </div>
         </div>
       </div>
       <Link href={`/profile/${user.username}`} className="block">
         <button className="w-full flex items-center justify-center gap-2 bg-zinc-800 hover:bg-zinc-700 text-white text-sm font-medium px-8 py-2.5 rounded-lg transition-colors">
-          <span>Profile</span>
+          <span>Hồ sơ</span>
           <ExternalLink className="w-3.5 h-3.5" />
         </button>
       </Link>

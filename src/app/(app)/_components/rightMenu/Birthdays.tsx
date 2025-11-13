@@ -82,7 +82,7 @@ const Birthdays = () => {
     <div className="p-6 bg-zinc-900/80 backdrop-blur-sm rounded-2xl border border-zinc-800/50 text-sm">
       {/* TOP */}
       <div className="flex items-center justify-between text-zinc-400 font-medium mb-5">
-        <span className="text-xs uppercase tracking-wider font-semibold">Sinh nhật - Birthdays</span>
+        <span className="text-xs uppercase tracking-wider font-semibold">Sinh nhật</span>
         <MoreVertical className="w-4 h-4 cursor-pointer hover:text-zinc-300 transition-colors" />
       </div>
 
@@ -104,8 +104,8 @@ const Birthdays = () => {
                 <span className="text-white font-medium hover:text-zinc-300 cursor-pointer transition-colors">
                   {friend.name || friend.username}
                 </span>
-                <span className="text-xs text-zinc-400 flex items-center gap-1">
-                  <Cake className="w-3 h-3" /> Hôm nay - Today
+                  <span className="text-xs text-zinc-400 flex items-center gap-1">
+                  <Cake className="w-3 h-3" /> Hôm nay
                 </span>
               </div>
               <button 
@@ -117,7 +117,7 @@ const Birthdays = () => {
                 onClick={() => handleCelebrate(friend.id)}
                 disabled={celebrating[friend.id]}
               >
-                {celebrating[friend.id] ? "Celebrated!" : "Celebrate"}
+                {celebrating[friend.id] ? "Đã chúc mừng!" : "Chúc mừng"}
               </button>
             </div>
           ))
@@ -135,12 +135,12 @@ const Birthdays = () => {
             <Gift className="w-5 h-5 text-zinc-400" />
           </div>
           <div className="flex flex-col gap-1">
-            <span className="text-white font-medium">
-              Sinh nhật sắp tới - Upcoming Birthdays
-            </span>
-            <span className="text-xs text-zinc-400">
-              {upcomingBirthdaysCount} friend{upcomingBirthdaysCount !== 1 ? 's' : ''} with upcoming birthdays
-            </span>
+                    <span className="text-white font-medium">
+                      Sinh nhật sắp tới
+                    </span>
+                    <span className="text-xs text-zinc-400">
+                      {upcomingBirthdaysCount} {upcomingBirthdaysCount === 1 ? 'bạn' : 'bạn'} có sinh nhật sắp tới
+                    </span>
           </div>
         </div>
         
@@ -148,7 +148,7 @@ const Birthdays = () => {
           className="bg-zinc-800 hover:bg-zinc-700 text-white p-3 text-xs rounded-lg transition-colors font-medium w-full"
           onClick={handleSeeAllClick}
         >
-          Xem tất cả - See all
+                  Xem tất cả
         </button>
       </div>
     </div>

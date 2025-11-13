@@ -41,12 +41,13 @@ const ProfilePage = async ({ params }: PageProps) => {
   if (isBlocked) return notFound();
 
   return (
-    <div className="flex gap-6 pt-6 px-4">
-      <div className="hidden xl:block w-[20%]">
+    <div className="flex pt-6">
+      <div className="hidden xl:block w-[320px] shrink-0 pl-4">
         <LeftMenu type="profile" />
       </div>
-      <div className="w-full lg:w-[70%] xl:w-[50%]">
-        <div className="flex flex-col gap-8">
+      <div className="flex-1 flex justify-center min-w-0">
+        <div className="w-full max-w-[720px] px-4">
+          <div className="flex flex-col gap-8">
           {/* Phần Ảnh Bìa và Thông Tin Hồ Sơ */}
           <div className="bg-zinc-900/80 backdrop-blur-sm rounded-2xl border border-zinc-800/50 overflow-hidden">
             {/* Phần Ảnh Bìa */}
@@ -159,9 +160,10 @@ const ProfilePage = async ({ params }: PageProps) => {
           </div>
           
           <Feed username={user.username}/>
+          </div>
         </div>
       </div>
-      <div className="hidden lg:block w-[30%]">
+      <div className="hidden lg:block w-[320px] shrink-0 pr-4">
         <RightMenu user={user} />
       </div>
     </div>

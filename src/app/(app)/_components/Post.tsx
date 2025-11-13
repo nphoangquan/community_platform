@@ -306,9 +306,9 @@ const Post = ({ post }: { post: FeedPostType }) => {
                 {needsTruncation && !isTranslated && !isSummarized && (
                   <button 
                     onClick={() => setIsExpanded(!isExpanded)} 
-                    className="text-emerald-600 dark:text-emerald-500 font-medium text-sm hover:underline focus:outline-none"
+                    className="text-zinc-300 font-medium text-sm hover:text-white hover:underline focus:outline-none transition-colors"
                   >
-                    {isExpanded ? "See less" : "See more"}
+                    {isExpanded ? "Thu gọn" : "Xem thêm"}
                   </button>
                 )}
                 
@@ -316,14 +316,14 @@ const Post = ({ post }: { post: FeedPostType }) => {
                   <button 
                     onClick={handleSummarize}
                     disabled={summarizing}
-                    className={`flex items-center gap-1 text-sm font-medium ${summarizing ? 'text-zinc-400 dark:text-zinc-500' : 'text-emerald-600 dark:text-emerald-500 hover:underline'} focus:outline-none transition-colors`}
+                    className={`flex items-center gap-1 text-sm font-medium ${summarizing ? 'text-zinc-400' : 'text-zinc-300 hover:text-white hover:underline'} focus:outline-none transition-colors`}
                   >
                     <Wand2 className="w-3 h-3" />
                     {summarizing 
-                      ? "Summarizing..." 
+                      ? "Đang tóm tắt..." 
                       : isSummarized 
-                        ? "Show original" 
-                        : "AI summarize"}
+                        ? "Hiện bản gốc" 
+                        : "AI tóm tắt"}
                   </button>
                 )}
                 

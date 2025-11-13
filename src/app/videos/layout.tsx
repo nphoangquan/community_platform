@@ -2,8 +2,8 @@ import LeftMenu from "@/app/(app)/_components/LeftMenu";
 import { Suspense } from "react";
 
 export const metadata = {
-  title: "Videos | Introvertia",
-  description: "View all your videos on Introvertia",
+  title: "Videos | Commun",
+  description: "View all your videos on Commun",
 };
 
 export default function VideosLayout({

@@ -24,20 +24,22 @@ const Homepage = async () => {
     : null;
 
   return (
-    <div className="flex gap-6 pt-6 px-4">
-      <div className="hidden xl:block w-[16%]">
+    <div className="flex pt-6">
+      <div className="hidden xl:block w-[360px] shrink-0 pl-4">
         <LeftMenu type="home"/>
       </div>
-      <div className="w-full lg:w-[75%] xl:w-[62%]">
-        <div className="flex flex-col gap-4">
-          {currentUserId && stories.length > 0 && (
-            <Stories stories={stories as any} />
-          )}
-          <AddPost />
-          <Feed />
+      <div className="flex-1 flex justify-center min-w-0">
+        <div className="w-full max-w-[720px] px-4">
+          <div className="flex flex-col gap-8">
+            {currentUserId && stories.length > 0 && (
+              <Stories stories={stories} />
+            )}
+            <AddPost />
+            <Feed />
+          </div>
         </div>
       </div>
-      <div className="hidden lg:block w-[26%]">
+      <div className="hidden lg:block w-[360px] shrink-0 pr-4">
         <RightMenu user={user || undefined} />
       </div>
     </div>

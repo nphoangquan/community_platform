@@ -6,6 +6,7 @@ import { X, Image as ImageIcon, Video, Save } from "lucide-react";
 import { env } from "@/shared/config/env";
 import { Post, User } from "@prisma/client";
 import { useRouter } from "next/navigation";
+import { updatePostSchema } from "@/shared/validation/post";
 
 interface CloudinaryResult {
   secure_url: string;
@@ -115,9 +116,9 @@ export default function EditPostWidget({ post, onClose }: EditPostWidgetProps) {
     setError(null);
     
     try {
-      // Validate
+      // Validate với schema
       if (!desc || desc.trim() === '') {
-        setError('Post content cannot be empty');
+        setError('Nội dung bài viết không được để trống');
         setIsSubmitting(false);
         return;
       }
@@ -140,18 +141,28 @@ export default function EditPostWidget({ post, onClose }: EditPostWidgetProps) {
         updatedData.video = media?.secure_url || post.video || null;
       }
       
+      // Validate với schema
+      const validation = updatePostSchema.safeParse(updatedData);
+      if (!validation.success) {
+        const errors = validation.error.flatten().fieldErrors;
+        const errorMessage = Object.values(errors).flat().join(', ') || 'Dữ liệu không hợp lệ';
+        setError(errorMessage);
+        setIsSubmitting(false);
+        return;
+      }
+      
       const response = await fetch(`/api/posts/${post.id}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(updatedData),
+        body: JSON.stringify(validation.data),
       });
 
       if (!response.ok) {
         const errorText = await response.text();
         console.error("Server response:", errorText);
-        throw new Error(errorText || "Failed to update post");
+        throw new Error(errorText || "Không thể cập nhật bài viết");
       }
 
       const updatedPost = await response.json();
@@ -174,7 +185,7 @@ export default function EditPostWidget({ post, onClose }: EditPostWidgetProps) {
       onClose();
     } catch (error) {
       console.error("Error updating post:", error);
-      setError(error instanceof Error ? error.message : "Failed to update post. Please try again.");
+      setError(error instanceof Error ? error.message : "Không thể cập nhật bài viết. Vui lòng thử lại.");
     } finally {
       setIsSubmitting(false);
     }
@@ -186,8 +197,8 @@ export default function EditPostWidget({ post, onClose }: EditPostWidgetProps) {
     <div className="fixed inset-0 bg-black/70 backdrop-blur-md z-[9999] flex items-center justify-center p-4">
       <div className="bg-white dark:bg-zinc-900 rounded-3xl w-full max-w-2xl overflow-hidden shadow-2xl dark:shadow-emerald-900/10 border border-zinc-100/20 dark:border-zinc-800/50">
         {/* Header */}
-        <div className="px-6 py-5 border-b border-zinc-100 dark:border-zinc-800 flex items-center justify-between relative">
-          <h2 className="text-2xl font-semibold text-zinc-800 dark:text-zinc-100">Edit Post</h2>
+        <div className="px-6 py-5 border-b border-zinc-800 flex items-center justify-between relative">
+          <h2 className="text-2xl font-semibold text-white">Chỉnh sửa bài viết</h2>
           <button 
             title="Close" 
             onClick={onClose}
@@ -198,8 +209,8 @@ export default function EditPostWidget({ post, onClose }: EditPostWidgetProps) {
         </div>
 
         {/* User Info */}
-        <div className="px-6 py-4 flex items-center gap-3 border-b border-zinc-100 dark:border-zinc-800">
-          <div className="relative w-12 h-12 rounded-full overflow-hidden ring-2 ring-zinc-100 dark:ring-zinc-800">
+        <div className="px-6 py-4 flex items-center gap-3 border-b border-zinc-800">
+          <div className="relative w-12 h-12 rounded-full overflow-hidden ring-2 ring-zinc-800">
             <Image
               src={post.user?.avatar || "/noAvatar.png"}
               alt={post.user?.name || "User"}
@@ -208,7 +219,7 @@ export default function EditPostWidget({ post, onClose }: EditPostWidgetProps) {
             />
           </div>
           <div>
-            <div className="font-medium text-lg text-zinc-800 dark:text-zinc-100">
+            <div className="font-medium text-lg text-white">
               {post.user?.name || "User"}
             </div>
           </div>
@@ -228,8 +239,8 @@ export default function EditPostWidget({ post, onClose }: EditPostWidgetProps) {
             <textarea
               value={desc}
               onChange={(e) => setDesc(e.target.value)}
-              placeholder="What's on your mind?"
-              className="w-full bg-zinc-50 dark:bg-zinc-800/40 rounded-2xl px-4 py-3 placeholder:text-zinc-400 dark:placeholder:text-zinc-500 text-zinc-700 dark:text-zinc-200 outline-none resize-none min-h-[150px] text-lg border border-transparent focus:border-emerald-500/30 dark:focus:border-emerald-400/20 transition-all"
+              placeholder="Bạn đang nghĩ gì?"
+              className="w-full bg-zinc-800/40 rounded-2xl px-4 py-3 placeholder:text-zinc-500 text-zinc-200 outline-none resize-none min-h-[150px] text-lg border border-zinc-700 focus:border-emerald-500/30 transition-all"
               autoFocus
             />
 

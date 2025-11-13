@@ -2,8 +2,8 @@ import LeftMenu from "@/app/(app)/_components/LeftMenu";
 import { Suspense } from "react";
 
 export const metadata = {
-  title: "Photos | Introvertia",
-  description: "View all your photos on Introvertia",
+  title: "Photos | Commun",
+  description: "View all your photos on Commun",
 };
 
 export default function PhotosLayout({

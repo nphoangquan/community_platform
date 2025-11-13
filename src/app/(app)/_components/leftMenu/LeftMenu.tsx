@@ -36,22 +36,22 @@ const LeftMenu = async ({ type }: { type: "home" | "profile" }) => {
       {type === "home" && <ProfileCard />}
       <div className="p-5 bg-zinc-900/80 backdrop-blur-sm rounded-2xl border border-zinc-800/50 text-sm">
         <div className="flex flex-col gap-1">
-          <MenuLink href="/" icon={<FileText className="w-5 h-5" />} label="Posts" />
+          <MenuLink href="/" icon={<FileText className="w-5 h-5" />} label="Bài viết" />
           {userId && (
             <>
-              <MenuLink href="/activity" icon={<Activity className="w-5 h-5" />} label="Activity" />
-              <MenuLink href="/events/birthdays" icon={<Calendar className="w-5 h-5" />} label="Events" />
-              <MenuLink href="/photos" icon={<ImageIcon className="w-5 h-5" />} label="Photos" />
-              <MenuLink href="/videos" icon={<Video className="w-5 h-5" />} label="Videos" />
+              <MenuLink href="/activity" icon={<Activity className="w-5 h-5" />} label="Hoạt động" />
+              <MenuLink href="/events/birthdays" icon={<Calendar className="w-5 h-5" />} label="Sự kiện" />
+              <MenuLink href="/photos" icon={<ImageIcon className="w-5 h-5" />} label="Ảnh" />
+              <MenuLink href="/videos" icon={<Video className="w-5 h-5" />} label="Video" />
               {username && (
                 <MenuLink 
                   href={`/profile/${username}`} 
                   icon={<BookOpen className="w-5 h-5" />} 
-                  label="Profile" 
+                  label="Hồ sơ" 
                 />
               )}
-              <MenuLink href="/friends" icon={<List className="w-5 h-5" />} label="Friend Lists" />
-              <MenuLink href="/settings" icon={<Settings className="w-5 h-5" />} label="Settings" />
+              <MenuLink href="/friends" icon={<List className="w-5 h-5" />} label="Danh sách bạn bè" />
+              <MenuLink href="/settings" icon={<Settings className="w-5 h-5" />} label="Cài đặt" />
             </>
           )}
         </div>

@@ -167,9 +167,9 @@ export const declineFollowRequest = async (userId: string) => {
 
 export const updateProfile = async (
   prevState: { success: boolean; error: boolean },
-  payload: { formData: FormData; cover: string }
+  payload: { formData: FormData; cover: string; avatar?: string }
 ) => {
-  const { formData, cover } = payload;
+  const { formData, cover, avatar } = payload;
   const fields = Object.fromEntries(formData);
 
   const filteredFields = Object.fromEntries(
@@ -185,6 +185,7 @@ export const updateProfile = async (
 
   const Profile = z.object({
     cover: z.string().optional(),
+    avatar: z.string().optional(),
     name: z.string().max(60).optional(),
     surname: z.string().max(60).optional(),
     birthDate: z.date().optional(),
@@ -197,6 +198,7 @@ export const updateProfile = async (
 
   const validatedFields = Profile.safeParse({ 
     cover, 
+    ...(avatar && { avatar }),
     ...filteredFields,
     ...(birthDateValue && { birthDate: birthDateValue })
   });
@@ -333,6 +335,31 @@ export const addComment = async (postId: number, desc: string, parentId?: number
       if (parentComment && parentComment.userId !== userId) {
         await createCommentNotification(userId, parentComment.userId, postId, comment.id);
       }
+    }
+    
+    // Emit socket event để real-time update
+    try {
+      const { emitToUser } = await import("@/lib/socket");
+      const post = await prisma.post.findUnique({
+        where: { id: postId },
+        select: { userId: true }
+      });
+      
+      if (post) {
+        emitToUser(post.userId, "new_comment", {
+          postId,
+          comment: {
+            id: comment.id,
+            desc: comment.desc,
+            createdAt: comment.createdAt,
+            userId: comment.userId,
+            user: comment.user,
+            parentId: comment.parentId
+          }
+        });
+      }
+    } catch (error) {
+      console.error("Failed to emit comment notification:", error);
     }
     
     revalidatePath(`/post/${postId}`);
@@ -493,6 +520,12 @@ export const deleteComment = async (commentId: number) => {
       throw new Error("Comment not found");
     }
     
+    // Lấy thông tin post để emit socket event
+    const commentWithPost = await prisma.comment.findUnique({
+      where: { id: commentId },
+      select: { postId: true, post: { select: { userId: true } } }
+    });
+    
     // Nếu là admin hoặc moderator, hoặc chính là người tạo bình luận
     if (user?.role === "admin" || user?.role === "moderator" || comment.userId === userId) {
       await prisma.comment.delete({
@@ -500,6 +533,20 @@ export const deleteComment = async (commentId: number) => {
           id: commentId,
         },
       });
+      
+      // Emit socket event để real-time update
+      if (commentWithPost?.post) {
+        try {
+          const { emitToUser } = await import("@/lib/socket");
+          emitToUser(commentWithPost.post.userId, "comment_deleted", {
+            postId: commentWithPost.postId,
+            commentId
+          });
+        } catch (error) {
+          console.error("Failed to emit comment delete notification:", error);
+        }
+      }
+      
       revalidatePath("/");
       return { success: true };
     } else {

@@ -74,7 +74,7 @@ const UserInfoCard = async ({ user }: { user: User }) => {
   return (
     <div className="p-6 bg-zinc-900/80 rounded-2xl border border-zinc-800/50 text-sm flex flex-col gap-4">
       <div className="flex justify-between items-center mb-2 font-medium text-zinc-400">
-        <span className="text-xs uppercase tracking-wider font-semibold">User Info - Thông tin người dùng</span>
+        <span className="text-xs uppercase tracking-wider font-semibold">Thông tin người dùng</span>
         {currentUserId === user.id ? (
           <UpdateUser user={user} />
         ) : (
@@ -105,7 +105,7 @@ const UserInfoCard = async ({ user }: { user: User }) => {
           <div className="flex items-center gap-2 hover:text-zinc-200 transition-colors">
             <GraduationCap className="w-4 h-4" />
             <span>
-              Đã tốt nghiệp tại <b className="text-white">{user.school}</b>
+              Học tại <b className="text-white">{user.school}</b>
             </span>
           </div>
         )}
@@ -140,7 +140,7 @@ const UserInfoCard = async ({ user }: { user: User }) => {
         
         <div className="flex gap-1 items-center text-xs text-zinc-400 hover:text-zinc-300 transition-colors">
           <CalendarDays className="w-4 h-4" />
-          <span>Đã tham gia {formattedDate}</span>
+          <span>Tham gia ngày {formattedDate}</span>
         </div>
 
         {currentUserId && currentUserId !== user.id && (

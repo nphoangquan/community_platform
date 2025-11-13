@@ -1,4 +1,4 @@
-## Introvertia - A Community Platform
+## Commun - Community Platform
 
 A fully functional community platform with multiple features built with NextJS.
 
@@ -67,7 +67,7 @@ npm install
 1. **Set up environment variables**
 Create a `.env.local` file in the root directory:
 ```env
-DATABASE_URL="postgresql://username:password@localhost:5432/introvertia"
+DATABASE_URL="postgresql://username:password@localhost:5432/commun"
 NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME="your_cloud_name"
 NEXT_PUBLIC_CLOUDINARY_API_KEY="your_api_key"
 CLOUDINARY_API_SECRET="your_api_secret"

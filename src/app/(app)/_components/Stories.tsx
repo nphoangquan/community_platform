@@ -98,19 +98,18 @@ export default function Stories({ stories }: StoriesProps) {
 
   if (!stories || stories.length === 0) {
     return (
-      <div className="bg-white/90 dark:bg-zinc-900/90 backdrop-blur-sm rounded-xl shadow-sm dark:shadow-zinc-800/20 p-4">
+      <div className="bg-zinc-900/80 backdrop-blur-sm rounded-xl border border-zinc-800/50 p-4">
         <div className="flex items-center gap-4">
           {/* Create Story Card */}
           <div 
             onClick={handleCreateStory}
-            className="relative w-28 h-44 bg-gray-100 dark:bg-zinc-800 rounded-xl cursor-pointer overflow-hidden group hover:scale-[1.02] transition-transform duration-200"
+            className="relative w-28 h-44 bg-zinc-800 rounded-xl cursor-pointer overflow-hidden hover:bg-zinc-700 transition-colors"
           >
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/20"></div>
             <div className="absolute bottom-0 left-0 right-0 p-3">
-              <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center mb-2 mx-auto">
+              <div className="w-8 h-8 bg-emerald-600 rounded-full flex items-center justify-center mb-2 mx-auto">
                 <Plus className="w-4 h-4 text-white" />
               </div>
-              <p className="text-xs font-medium text-center text-gray-900 dark:text-white">
+              <p className="text-xs font-medium text-center text-white">
                 Tạo Story
               </p>
             </div>
@@ -121,16 +120,16 @@ export default function Stories({ stories }: StoriesProps) {
   }
 
   return (
-    <div className="bg-white/90 dark:bg-zinc-900/90 backdrop-blur-sm rounded-xl shadow-sm dark:shadow-zinc-800/20 p-3 sm:p-4 relative">
+    <div className="bg-zinc-900/80 backdrop-blur-sm rounded-xl border border-zinc-800/50 p-3 sm:p-4 relative">
       {/* Scroll buttons - hidden on mobile */}
       {canScrollLeft && (
         <button
           onClick={() => scroll('left')}
-          title="Scroll left"
-          aria-label="Scroll stories left"
-          className="hidden sm:flex absolute left-2 top-1/2 -translate-y-1/2 z-10 w-8 h-8 bg-white dark:bg-zinc-800 rounded-full shadow-lg border border-gray-200 dark:border-zinc-700 items-center justify-center hover:scale-110 transition-transform"
+          title="Cuộn trái"
+          aria-label="Cuộn trái"
+          className="hidden sm:flex absolute left-2 top-1/2 -translate-y-1/2 z-10 w-8 h-8 bg-zinc-800 rounded-full border border-zinc-700 items-center justify-center hover:bg-zinc-700 transition-colors"
         >
-          <svg className="w-4 h-4 text-gray-600 dark:text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="w-4 h-4 text-zinc-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
           </svg>
         </button>
@@ -139,11 +138,11 @@ export default function Stories({ stories }: StoriesProps) {
       {canScrollRight && (
         <button
           onClick={() => scroll('right')}
-          title="Scroll right"
-          aria-label="Scroll stories right"
-          className="hidden sm:flex absolute right-2 top-1/2 -translate-y-1/2 z-10 w-8 h-8 bg-white dark:bg-zinc-800 rounded-full shadow-lg border border-gray-200 dark:border-zinc-700 items-center justify-center hover:scale-110 transition-transform"
+          title="Cuộn phải"
+          aria-label="Cuộn phải"
+          className="hidden sm:flex absolute right-2 top-1/2 -translate-y-1/2 z-10 w-8 h-8 bg-zinc-800 rounded-full border border-zinc-700 items-center justify-center hover:bg-zinc-700 transition-colors"
         >
-          <svg className="w-4 h-4 text-gray-600 dark:text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="w-4 h-4 text-zinc-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
           </svg>
         </button>
@@ -157,7 +156,7 @@ export default function Stories({ stories }: StoriesProps) {
         {/* Create Story Card */}
         <div 
           onClick={handleCreateStory}
-          className="relative flex-shrink-0 w-24 h-36 sm:w-28 sm:h-44 bg-gray-100 dark:bg-zinc-800 rounded-xl cursor-pointer overflow-hidden group hover:scale-[1.02] transition-transform duration-200"
+          className="relative flex-shrink-0 w-24 h-36 sm:w-28 sm:h-44 bg-zinc-800 rounded-xl cursor-pointer overflow-hidden hover:bg-zinc-700 transition-colors"
         >
           {/* User's profile image as background */}
           {currentUser?.imageUrl && (
@@ -168,16 +167,16 @@ export default function Stories({ stories }: StoriesProps) {
                 fill
                 className="object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/30"></div>
+              <div className="absolute inset-0 bg-black/20"></div>
             </div>
           )}
           
           {/* Create button */}
           <div className="absolute bottom-0 left-0 right-0 p-2 sm:p-3">
-            <div className="w-6 h-6 sm:w-8 sm:h-8 bg-blue-500 rounded-full flex items-center justify-center mb-1 sm:mb-2 mx-auto shadow-md">
+            <div className="w-6 h-6 sm:w-8 sm:h-8 bg-emerald-600 rounded-full flex items-center justify-center mb-1 sm:mb-2 mx-auto">
               <Plus className="w-3 h-3 sm:w-4 sm:h-4 text-white" />
             </div>
-            <p className="text-[10px] sm:text-xs font-medium text-center text-white drop-shadow-sm">
+            <p className="text-[10px] sm:text-xs font-medium text-center text-white">
               Tạo Story
             </p>
           </div>
@@ -188,7 +187,7 @@ export default function Stories({ stories }: StoriesProps) {
           <div
             key={userStories.user.id}
             onClick={() => handleStoryClick(userStories.latestStory.id)}
-            className="relative flex-shrink-0 w-24 h-36 sm:w-28 sm:h-44 rounded-xl cursor-pointer overflow-hidden group hover:scale-[1.02] transition-transform duration-200"
+            className="relative flex-shrink-0 w-24 h-36 sm:w-28 sm:h-44 rounded-xl cursor-pointer overflow-hidden hover:opacity-90 transition-opacity"
           >
             {/* Story background */}
             <div className="absolute inset-0">
@@ -208,13 +207,13 @@ export default function Stories({ stories }: StoriesProps) {
                   className="object-cover"
                 />
               )}
-              <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/40"></div>
+              <div className="absolute inset-0 bg-black/30"></div>
             </div>
 
             {/* User avatar */}
             <div className="absolute top-2 left-2 sm:top-3 sm:left-3">
               <div className={`w-6 h-6 sm:w-8 sm:h-8 rounded-full overflow-hidden border-2 ${
-                userStories.hasUnread ? 'border-blue-500' : 'border-gray-300'
+                userStories.hasUnread ? 'border-emerald-500' : 'border-zinc-400'
               }`}>
                 <Image
                   src={userStories.user.avatar || "/placeholder.png"}
@@ -244,7 +243,7 @@ export default function Stories({ stories }: StoriesProps) {
 
             {/* Unread indicator */}
             {userStories.hasUnread && (
-              <div className="absolute inset-0 rounded-xl ring-2 ring-blue-500 ring-offset-1 ring-offset-white dark:ring-offset-zinc-900"></div>
+              <div className="absolute inset-0 rounded-xl ring-2 ring-emerald-500"></div>
             )}
           </div>
         ))}

@@ -17,14 +17,16 @@ export default async function ActivityPage() {
   const activities = await getUserActivity(1, 20);
 
   return (
-    <div className="flex gap-6 pt-6 px-4">
-      <div className="hidden xl:block w-[16%]">
+    <div className="flex pt-6">
+      <div className="hidden xl:block w-[320px] shrink-0 pl-4">
         <LeftMenu type="home" />
       </div>
-      <div className="w-full lg:w-[75%] xl:w-[62%]">
-        <ActivityLog initialActivities={activities} />
+      <div className="flex-1 flex justify-center min-w-0">
+        <div className="w-full max-w-[720px] px-4">
+          <ActivityLog initialActivities={activities} />
+        </div>
       </div>
-      <div className="hidden lg:block w-[26%]">
+      <div className="hidden lg:block w-[320px] shrink-0 pr-4">
         <RightMenu />
       </div>
     </div>

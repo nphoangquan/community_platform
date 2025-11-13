@@ -54,15 +54,16 @@ export async function ensureUserExists(userId: string) {
       
       username = finalUsername;
     } else {
-      // Kiểm tra username có unique không
-      const existingUsername = await prisma.user.findUnique({
-        where: { username }
-      });
+      // Kiểm tra username có unique không và đảm bảo unique
+      let finalUsername = username;
+      let counter = 1;
       
-      if (existingUsername) {
-        // Thêm số ngẫu nhiên nếu username đã tồn tại
-        username = username + '_' + Math.floor(Math.random() * 10000);
+      while (await prisma.user.findUnique({ where: { username: finalUsername } })) {
+        finalUsername = `${username}_${counter}`;
+        counter++;
       }
+      
+      username = finalUsername;
     }
 
     // Tạo user trong database

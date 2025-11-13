@@ -62,7 +62,7 @@ export default function SearchBar() {
     <div ref={searchRef} className="relative">
       <div className='flex p-2.5 bg-zinc-800/50 items-center rounded-xl border border-zinc-700/50 hover:bg-zinc-800/70 transition-colors group'>
         <input 
-          type="text" placeholder="Search..." className="bg-transparent outline-none text-zinc-300 placeholder-zinc-500 w-48"
+          type="text" placeholder="Tìm kiếm..." className="bg-transparent outline-none text-zinc-300 placeholder-zinc-500 w-48"
           value={query} onChange={handleInputChange} onFocus={() => setIsSearchOpen(true)}
         />
         {query ? (
@@ -76,13 +76,13 @@ export default function SearchBar() {
           {isLoading ? (
             <div className="p-4 text-center text-zinc-400">
               <div className="inline-block h-4 w-4 animate-spin rounded-full border-2 border-zinc-600 border-solid border-current border-e-transparent align-[-0.125em] text-surface motion-reduce:animate-[spin_1.5s_linear_infinite] mr-2" />
-              Searching...
+              Đang tìm kiếm...
             </div>
           ) : (
             <>
               {searchResults.users?.length > 0 && (
                 <div className="p-2">
-                  <div className="text-sm font-semibold text-zinc-400 px-2 pb-2 border-b border-zinc-700">People</div>
+                  <div className="text-sm font-semibold text-zinc-400 px-2 pb-2 border-b border-zinc-700">Người dùng</div>
                   <ul>
                     {searchResults.users.map((user) => (
                       <li key={user.id}>
@@ -102,7 +102,7 @@ export default function SearchBar() {
               )}
               {searchResults.posts?.length > 0 && (
                 <div className="p-2">
-                  <div className="text-sm font-semibold text-zinc-400 px-2 pb-2 border-b border-zinc-700">Posts</div>
+                  <div className="text-sm font-semibold text-zinc-400 px-2 pb-2 border-b border-zinc-700">Bài viết</div>
                   <ul>
                     {searchResults.posts.map((post) => (
                       <li key={post.id}>
@@ -129,7 +129,7 @@ export default function SearchBar() {
                 </div>
               )}
               {query.trim().length >= 2 && searchResults.users.length === 0 && searchResults.posts.length === 0 && (
-                <div className="p-4 text-center text-zinc-400">No results found for &ldquo;{query}&rdquo;</div>
+                <div className="p-4 text-center text-zinc-400">Không tìm thấy kết quả cho &ldquo;{query}&rdquo;</div>
               )}
             </>
           )}

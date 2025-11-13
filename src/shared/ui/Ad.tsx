@@ -14,23 +14,23 @@ const Ad = ({ size }: { size: "sm" | "md" | "lg" }) => {
           <div className={`relative w-full overflow-hidden ${
             size === "sm" ? "h-32" : size === "md" ? "h-40" : "h-52"
           }`}>
-            <Image src="/itv_second.png" alt="Introvertia Ad" fill className="object-cover hover:scale-105 transition-transform duration-500" />
+            <Image src="/itv_second.png" alt="Commun Ad" fill className="object-cover hover:scale-105 transition-transform duration-500" />
           </div>
           <div className="flex items-center gap-3 px-4">
             <div className="relative w-8 h-8 rounded-md overflow-hidden">
-              <Image src="/introvertia-icon.png" alt="Introvertia Logo" fill className="object-cover" />
+              <Image src="/introvertia-icon.png" alt="Commun Logo" fill className="object-cover" />
             </div>
             <div className="flex flex-col">
-              <span className="text-zinc-100 font-medium">INTROVERTIA</span>
+              <span className="text-zinc-100 font-medium">COMMUN</span>
               <span className="text-xs text-zinc-500">Quảng Cáo</span>
             </div>
           </div>
           <p className={`px-4 ${size === "sm" ? "text-xs" : "text-sm"} text-zinc-300 leading-relaxed`}>
             {size === "sm"
-              ? "Introvertia - Bạn hướng ngoại, tôi không phải."
+              ? "Commun - Community Platform"
               : size === "md"
-              ? "Introvertia - Tôi hướng nội, bạn cũng thế."
-              : "Introvertia - Bạn hướng ngoại, tôi không phải."}
+              ? "Commun - Community Platform"
+              : "Commun - Community Platform"}
           </p>
           <div className="px-4 pb-4">
             <button className="bg-zinc-800 text-zinc-200 p-2.5 text-xs rounded-lg hover:bg-zinc-700 transition-colors font-medium w-full">

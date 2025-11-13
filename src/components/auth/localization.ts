@@ -15,7 +15,7 @@ export const authLocalization = {
   },
   signIn: {
     start: {
-      title: "Đăng nhập vào Introvertia",
+      title: "Đăng nhập vào Commun",
       subtitle: "Nhập thông tin của bạn để tiếp tục",
       actionText: "Chưa có tài khoản?",
       actionLink: "Đăng ký",
