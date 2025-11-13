@@ -138,19 +138,19 @@ const Feed = ({ username }: FeedProps) => {
           <div 
             key={post.id} 
             ref={index === posts.length - 1 ? lastPostElementRef : null}
-            className="mb-4 bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm rounded-xl shadow-md dark:shadow-zinc-800/20"
+            className="mb-4 bg-zinc-900/80 backdrop-blur-sm rounded-xl border border-zinc-800/50"
           >
             <Post post={post}/>
           </div>
         ))
       ) : (
-        <div className="text-center py-8 text-zinc-500 dark:text-zinc-400 bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm rounded-xl shadow-md dark:shadow-zinc-800/20">
-          No posts found! - Không có bài viết nào được tìm thấy!
+        <div className="text-center py-8 text-zinc-400 bg-zinc-900/80 backdrop-blur-sm rounded-xl border border-zinc-800/50">
+          Không có bài viết nào được tìm thấy
         </div>
       )}
       {loading && (
         <div className="flex justify-center py-4">
-          <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-emerald-500 border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]" />
+          <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-zinc-600 border-r-transparent align-[-0.125em]" />
         </div>
       )}
     </div>

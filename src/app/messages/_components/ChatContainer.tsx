@@ -3,7 +3,6 @@
 import { useEffect, useRef, useState, useCallback } from "react";
 import { SendHorizontal, Image as ImageIcon, X, Loader2, AlertCircle, Trash2, Download, ChevronLeft, ChevronRight, Smile } from "lucide-react";
 import { formatDistanceToNow } from "date-fns";
-import { io, Socket } from "socket.io-client";
 import Image from "next/image";
 import { createPortal } from "react-dom";
 import dynamic from "next/dynamic";
@@ -17,8 +16,8 @@ import {
 import { env } from "@/shared/config/env";
 import { z } from "zod";
 import ChatHeader from "./ChatHeader";
+import { useSocketContext } from "@/lib/contexts/SocketContext";
 
-// Import emoji picker 
 const EmojiPicker = dynamic(() => import("emoji-picker-react"), { 
   ssr: false,
   loading: () => <div className="p-2">Loading...</div>
@@ -69,11 +68,13 @@ export default function ChatContainer({ chatId, userId }: ChatContainerProps) {
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const messagesStartRef = useRef<HTMLDivElement>(null);
   const messagesContainerRef = useRef<HTMLDivElement>(null);
-  const socketRef = useRef<Socket | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const scrollHeightRef = useRef<number>(0);
   const observerRef = useRef<IntersectionObserver | null>(null);
   const emojiPickerRef = useRef<HTMLDivElement>(null);
+  
+  // Sử dụng shared socket connection
+  const { socket } = useSocketContext();
 
   // Cài đặt trạng thái mounted cho các portal client-side
   useEffect(() => {
@@ -146,25 +147,20 @@ export default function ChatContainer({ chatId, userId }: ChatContainerProps) {
 
     loadMessages();
 
-    // Thiết lập kết nối socket
-    if (!socketRef.current) {
-      socketRef.current = io(window.location.origin, {
-        path: "/api/socket",
-        autoConnect: true,
-        reconnection: true,
-        reconnectionAttempts: 5,
-        reconnectionDelay: 1000,
-      });
+    // Sử dụng shared socket connection
+    if (!socket) {
+      return;
     }
 
-    const socket = socketRef.current;
-
+    // Đảm bảo socket đã connected
     if (!socket.connected) {
       socket.connect();
     }
 
-    // Tham gia phòng của người dùng để nhận tin nhắn
-    socket.emit("join", userId);
+    // Tham gia phòng của người dùng để nhận tin nhắn (nếu chưa join)
+    if (socket.connected) {
+      socket.emit("join", userId);
+    }
 
     // Hàm listen tin nhắn mới
     const handleNewMessage = (data: MessageEvent) => {
@@ -183,8 +179,10 @@ export default function ChatContainer({ chatId, userId }: ChatContainerProps) {
 
     // Hàm xử lý kết nối lại
     const handleReconnect = () => {
-      console.log("Socket reconnected");
-      socket.emit("join", userId);
+      console.log("Socket reconnected in ChatContainer");
+      if (socket.connected) {
+        socket.emit("join", userId);
+      }
     };
 
     socket.on("connect", handleReconnect);
@@ -196,7 +194,7 @@ export default function ChatContainer({ chatId, userId }: ChatContainerProps) {
       socket.off("message_deleted", handleDeletedMessage);
       socket.off("connect", handleReconnect);
     };
-  }, [chatId, userId]);
+  }, [chatId, userId, socket]);
 
   // Thiết lập observer cuộn vô hạn
   useEffect(() => {
@@ -304,7 +302,6 @@ export default function ChatContainer({ chatId, userId }: ChatContainerProps) {
       
       setSelectedImage(file);
       
-      // Tạo URL preview sử dụng URL.createObjectURL thay vì FileReader
       const previewUrl = URL.createObjectURL(file);
       setImagePreviewUrl(previewUrl);
     }
@@ -725,7 +722,6 @@ export default function ChatContainer({ chatId, userId }: ChatContainerProps) {
             )}
           
             {messages.map((message) => {
-              // Check if message contains only an image without text
               const isImageOnlyMessage = message.img && (!message.content || message.content.trim() === "");
               
               return (

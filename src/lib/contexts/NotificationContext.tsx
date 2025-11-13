@@ -1,7 +1,7 @@
 'use client';
 
 import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
-import { useSocket } from '../hooks/useSocket';
+import { useSocketContext } from './SocketContext';
 import { useUser } from '@clerk/nextjs';
 import { NotificationPayload } from '../socket';
 
@@ -24,7 +24,7 @@ export const NotificationProvider = ({ children }: { children: React.ReactNode }
   const [notifications, setNotifications] = useState<NotificationPayload[]>([]);
   const [unreadCount, setUnreadCount] = useState(0);
   const [loading, setLoading] = useState(false);
-  const socket = useSocket();
+  const { socket } = useSocketContext();
   const { user } = useUser();
 
   // Fetch thông báo từ API

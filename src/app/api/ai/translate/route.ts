@@ -44,7 +44,7 @@ export async function POST(req: Request) {
       messages: [
         {
           role: "system",
-          content: `Bạn là AI chuyên dịch nội dung sang các ngôn ngữ khác nhau một cách chính xác. Hãy dịch văn bản được cung cấp sang ${languageName}. Giữ nguyên các emoji, hashtag, và đường link.`
+          content: `Bạn là AI chuyên dịch nội dung sang các ngôn ngữ khác nhau một cách chính xác. Hãy dịch văn bản được cung cấp sang ${languageName}. Giữ nguyên hashtag và đường link.`
         },
         {
           role: "user",

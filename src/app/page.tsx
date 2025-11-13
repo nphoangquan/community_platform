@@ -17,8 +17,14 @@ const Homepage = async () => {
       })
     : [];
 
+  const user = currentUserId
+    ? await prisma.user.findUnique({
+        where: { id: currentUserId },
+      })
+    : null;
+
   return (
-    <div className="flex gap-6 pt-6">
+    <div className="flex gap-6 pt-6 px-4">
       <div className="hidden xl:block w-[16%]">
         <LeftMenu type="home"/>
       </div>
@@ -32,7 +38,7 @@ const Homepage = async () => {
         </div>
       </div>
       <div className="hidden lg:block w-[26%]">
-        <RightMenu />
+        <RightMenu user={user || undefined} />
       </div>
     </div>
   );

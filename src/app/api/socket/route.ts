@@ -1,21 +1,27 @@
-import { initSocket } from "@/lib/socket";
+import { getSocketIO } from "@/lib/socket";
 import { NextResponse } from 'next/server';
 
 export async function GET() {
   try {
-    // Khởi tạo server Socket.IO 
-    const io = initSocket(null);
+    // Kiểm tra Socket.IO server có sẵn sàng không
+    const io = getSocketIO();
     
-    // Đảm bảo server đã sẵn sàng nhận kết nối
     if (io) {
-      console.log();
+      return NextResponse.json({ 
+        success: true, 
+        message: "Socket.IO server is running",
+        connectedClients: io.sockets.sockets.size
+      });
     }
     
-    return NextResponse.json({ success: true, message: "Socket.IO server initialized" });
-  } catch (error) {
-    console.error("Socket initialization error:", error);
     return NextResponse.json(
-      { success: false, message: "Failed to initialize Socket.IO server" },
+      { success: false, message: "Socket.IO server not initialized" },
+      { status: 503 }
+    );
+  } catch (error) {
+    console.error("Socket check error:", error);
+    return NextResponse.json(
+      { success: false, message: "Failed to check Socket.IO server" },
       { status: 500 }
     );
   }

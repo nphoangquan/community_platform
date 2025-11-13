@@ -96,13 +96,13 @@ export default async function PostPage({
   };
 
   return (
-    <div className="flex gap-6 pt-6">
+    <div className="flex gap-6 pt-6 px-4">
       <div className="hidden xl:block w-[16%]">
         <LeftMenu type="home" />
       </div>
       <div className="w-full lg:w-[75%] xl:w-[62%]">
-        <div className="bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm rounded-2xl shadow-lg dark:shadow-zinc-800/20 border border-zinc-100/50 dark:border-zinc-800/50 p-6">
-          <h1 className="text-2xl font-bold text-zinc-800 dark:text-zinc-200 mb-6">Post</h1>
+        <div className="bg-zinc-900/80 backdrop-blur-sm rounded-2xl border border-zinc-800/50 p-6">
+          <h1 className="text-2xl font-bold text-white mb-6">Post</h1>
           <PostDetail 
             post={transformedPost} 
             standalone={true} 

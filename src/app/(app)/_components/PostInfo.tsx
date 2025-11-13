@@ -90,8 +90,8 @@ const PostInfo = ({ post, currentUserId }: { post: PostWithUserAndComments; curr
               }}
               type="button"
             >
-              <Eye className="w-4 h-4 text-white group-hover:text-emerald-500 transition-colors" />
-              <span className="text-white group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r from-emerald-500 via-emerald-400 to-emerald-500 animate-gradient-slow bg-[length:200%_auto]">View details</span>
+              <Eye className="w-4 h-4 text-white group-hover:text-zinc-300 transition-colors" />
+              <span className="text-white group-hover:text-zinc-300 transition-colors">View details</span>
             </button>
             
             {isOwner && (

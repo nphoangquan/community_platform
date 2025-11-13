@@ -16,17 +16,6 @@ const ProfilePage = async ({ params }: PageProps) => {
   const { username } = await params;
   const { userId } = await auth();
 
-  if (!userId) {
-    return (
-      <div className="flex items-center justify-center h-screen">
-        <div className="text-center">
-          <h1 className="text-2xl font-semibold text-zinc-200 mb-2">Not authenticated</h1>
-          <p className="text-zinc-400">Please sign in to view profiles</p>
-        </div>
-      </div>
-    );
-  }
-
   const user = await prisma.user.findUnique({
     where: { username },
   });
@@ -35,7 +24,7 @@ const ProfilePage = async ({ params }: PageProps) => {
     notFound();
   }
 
-  let isBlocked;
+  let isBlocked = false;
   const isCurrentUser = userId === user.id;
 
   if (userId) {
@@ -47,21 +36,19 @@ const ProfilePage = async ({ params }: PageProps) => {
     });
 
     if (res) isBlocked = true;
-  } else {
-    isBlocked = false;
   }
 
   if (isBlocked) return notFound();
 
   return (
-    <div className="flex gap-6 pt-6">
+    <div className="flex gap-6 pt-6 px-4">
       <div className="hidden xl:block w-[20%]">
         <LeftMenu type="profile" />
       </div>
       <div className="w-full lg:w-[70%] xl:w-[50%]">
         <div className="flex flex-col gap-8">
           {/* Phần Ảnh Bìa và Thông Tin Hồ Sơ */}
-          <div className="bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm rounded-2xl shadow-lg dark:shadow-zinc-800/20 border border-zinc-100/50 dark:border-zinc-800/50 overflow-hidden">
+          <div className="bg-zinc-900/80 backdrop-blur-sm rounded-2xl border border-zinc-800/50 overflow-hidden">
             {/* Phần Ảnh Bìa */}
             <div className="relative h-64 w-full bg-gradient-to-r from-zinc-800 to-zinc-900">
               {user.cover ? (
@@ -73,7 +60,7 @@ const ProfilePage = async ({ params }: PageProps) => {
                 />
               ) : (
                 <div className="absolute inset-0 bg-gradient-to-r from-zinc-800 to-zinc-900 flex items-center justify-center">
-                  <span className="text-zinc-600 dark:text-zinc-500 text-lg">No cover photo</span>
+                  <span className="text-zinc-500 text-lg">No cover photo</span>
                 </div>
               )}
               
@@ -81,7 +68,7 @@ const ProfilePage = async ({ params }: PageProps) => {
               {isCurrentUser && (
                 <Link
                   href="/settings"
-                  className="absolute bottom-4 right-4 bg-zinc-200/80 dark:bg-zinc-800/80 backdrop-blur-sm text-zinc-800 dark:text-zinc-200 p-2 rounded-full hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors"
+                  className="absolute bottom-4 right-4 bg-zinc-800/80 backdrop-blur-sm text-white p-2 rounded-full hover:bg-zinc-700 transition-colors"
                   aria-label="Edit cover photo"
                 >
                   <Camera className="w-5 h-5" />
@@ -116,39 +103,39 @@ const ProfilePage = async ({ params }: PageProps) => {
 
               <div className="flex flex-col md:flex-row gap-4 mt-2">
                 <div className="flex-1 text-center md:text-left">
-                  <h1 className="text-2xl font-semibold text-zinc-800 dark:text-zinc-200 mb-2">
+                  <h1 className="text-2xl font-semibold text-white mb-2">
                     {user.name && user.surname 
                       ? `${user.name} ${user.surname}` 
                       : user.username}
                   </h1>
                   
-                  <div className="text-zinc-500 dark:text-zinc-400 mb-4">
+                  <div className="text-zinc-400 mb-4">
                     @{user.username}
                   </div>
 
                   {user.description && (
-                    <div className="text-zinc-600 dark:text-zinc-300 mb-6 max-w-lg">
+                    <div className="text-zinc-300 mb-6 max-w-lg">
                       {user.description}
                     </div>
                   )}
 
                   <div className="flex flex-wrap gap-4 mb-6 justify-center md:justify-start text-sm">
                     {user.city && (
-                      <div className="flex items-center gap-1 text-zinc-600 dark:text-zinc-400">
+                      <div className="flex items-center gap-1 text-zinc-400">
                         <MapPin className="w-4 h-4" />
                         <span>{user.city}</span>
                       </div>
                     )}
                     
                     {user.school && (
-                      <div className="flex items-center gap-1 text-zinc-600 dark:text-zinc-400">
+                      <div className="flex items-center gap-1 text-zinc-400">
                         <GraduationCap className="w-4 h-4" />
                         <span>{user.school}</span>
                       </div>
                     )}
                     
                     {user.work && (
-                      <div className="flex items-center gap-1 text-zinc-600 dark:text-zinc-400">
+                      <div className="flex items-center gap-1 text-zinc-400">
                         <Briefcase className="w-4 h-4" />
                         <span>{user.work}</span>
                       </div>
@@ -156,10 +143,10 @@ const ProfilePage = async ({ params }: PageProps) => {
                     
                     {user.website && (
                       <div className="flex items-center gap-1">
-                        <LinkIcon className="w-4 h-4 text-zinc-600 dark:text-zinc-400" />
+                        <LinkIcon className="w-4 h-4 text-zinc-400" />
                         <Link 
                           href={user.website} 
-                          className="text-emerald-600 dark:text-emerald-400 hover:underline"
+                          className="text-zinc-300 hover:text-white hover:underline"
                         >
                           {user.website.replace(/(^\w+:|^)\/\//, '')}
                         </Link>

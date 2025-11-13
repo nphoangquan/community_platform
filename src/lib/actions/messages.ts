@@ -3,7 +3,6 @@
 import { revalidatePath } from "next/cache";
 import prisma from "@/lib/client";
 import { auth } from "@clerk/nextjs/server";
-import { initSocket } from "@/lib/socket";
 import { sendMessageSchema } from "@/shared/validation/messages";
 
 export type UserSearchResult = {
@@ -157,9 +156,9 @@ export async function sendMessage(chatId: number, content: string, img?: string)
       }
     });
 
+    const { emitToUser } = await import("@/lib/socket");
     for (const participant of otherParticipants) {
-      const io = initSocket(null);
-      io.to(participant.userId).emit("new_message", {
+      emitToUser(participant.userId, "new_message", {
         chatId,
         message: {
           id: message.id,
@@ -334,9 +333,9 @@ export async function deleteMessage(messageId: number) {
       }
     });
 
+    const { emitToUser } = await import("@/lib/socket");
     for (const participant of otherParticipants) {
-      const io = initSocket(null);
-      io.to(participant.userId).emit("message_deleted", {
+      emitToUser(participant.userId, "message_deleted", {
         chatId: message.chatId,
         messageId: message.id
       });

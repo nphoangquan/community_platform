@@ -1,4 +1,4 @@
-import { initSocket, NotificationPayload } from "@/lib/socket";
+import { emitToUser, NotificationPayload } from "@/lib/socket";
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from "zod";
 
@@ -16,11 +16,15 @@ export async function POST(req: NextRequest) {
     if (!parsed.success) return NextResponse.json({ success: false, message: "Invalid payload" }, { status: 400 });
     const notification: NotificationPayload = parsed.data as NotificationPayload;
     
-    // Khởi tạo socket.io server
-    const io = initSocket(null);
+    // Gửi thông báo đến user qua socket
+    const success = emitToUser(notification.receiverId, 'notification', notification);
     
-    // Gửi thông báo đến user
-    io.to(notification.receiverId).emit('notification', notification);
+    if (!success) {
+      return NextResponse.json(
+        { success: false, message: "Socket.IO server not available" },
+        { status: 503 }
+      );
+    }
     
     return NextResponse.json({ success: true, message: "Notification sent" });
   } catch (error) {

@@ -2,19 +2,17 @@
 
 import { useEffect, useState } from 'react';
 import { getUnreadCount } from '@/lib/actions/messages';
-import { io, Socket } from 'socket.io-client';
-import { isFeatureEnabled } from '@/shared/constants/featureFlags';
+import { useSocketContext } from '@/lib/contexts/SocketContext';
 import { useAuth } from '@clerk/nextjs';
 
 export default function MessagesBadge() {
   const [unreadCount, setUnreadCount] = useState(0);
-  const [socket, setSocket] = useState<Socket | null>(null);
+  const { socket } = useSocketContext();
   const { userId } = useAuth();
 
   useEffect(() => {
     if (!userId) return;
 
-    // Load unread count
     const loadUnreadCount = async () => {
       try {
         const count = await getUnreadCount();
@@ -26,36 +24,24 @@ export default function MessagesBadge() {
 
     loadUnreadCount();
 
-    // Set socket cho real-time updates
-    if (!socket && isFeatureEnabled('enableSocketNotifications')) {
-      const newSocket = io('', {
-        path: '/api/socket',
-        autoConnect: false
-      });
-      
-      newSocket.connect();
-      newSocket.emit('join', userId);
-      
-      setSocket(newSocket);
+    if (!socket) {
+      return;
     }
 
-    if (socket) {
-      const handleNewMessage = async () => {
-        // Khi nhận được tin nhắn mới, cập nhật số lượng tin nhắn chưa đọc
-        try {
-          const count = await getUnreadCount();
-          setUnreadCount(count);
-        } catch (error) {
-          console.error('Error updating unread count:', error);
-        }
-      };
-      
-      socket.on('new_message', handleNewMessage);
-      
-      return () => {
-        socket.off('new_message', handleNewMessage);
-      };
-    }
+    const handleNewMessage = async () => {
+      try {
+        const count = await getUnreadCount();
+        setUnreadCount(count);
+      } catch (error) {
+        console.error('Error updating unread count:', error);
+      }
+    };
+    
+    socket.on('new_message', handleNewMessage);
+    
+    return () => {
+      socket.off('new_message', handleNewMessage);
+    };
   }, [userId, socket]);
 
   if (unreadCount === 0) return null;

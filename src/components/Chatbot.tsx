@@ -42,7 +42,6 @@ export default function Chatbot() {
     const userMessage = message;
     setMessage('');
     
-    // Add user message to state
     setMessages(prev => [...prev, { role: 'user', content: userMessage }]);
     
     setIsLoading(true);
@@ -90,7 +89,6 @@ export default function Chatbot() {
     setTimeout(() => setIsAnimating(false), 500);
   };
 
-  // Không hiển thị chatbot nếu chưa load xong hoặc user chưa đăng nhập
   if (!isLoaded || !user) {
     return null;
   }

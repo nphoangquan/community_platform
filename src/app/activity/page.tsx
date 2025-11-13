@@ -17,7 +17,7 @@ export default async function ActivityPage() {
   const activities = await getUserActivity(1, 20);
 
   return (
-    <div className="flex gap-6 pt-6">
+    <div className="flex gap-6 pt-6 px-4">
       <div className="hidden xl:block w-[16%]">
         <LeftMenu type="home" />
       </div>

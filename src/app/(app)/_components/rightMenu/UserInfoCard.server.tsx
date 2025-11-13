@@ -72,61 +72,59 @@ const UserInfoCard = async ({ user }: { user: User }) => {
   }
 
   return (
-    <div className="p-6 bg-white/80 dark:bg-zinc-900/80 rounded-2xl shadow-lg dark:shadow-zinc-800/20 text-sm border border-zinc-100/50 dark:border-zinc-800/50 hover:shadow-xl dark:hover:shadow-zinc-800/30 transition-all duration-300 flex flex-col gap-4">
-      {/* TOP */}
-      <div className="flex justify-between items-center mb-2 font-medium text-zinc-500 dark:text-zinc-400">
+    <div className="p-6 bg-zinc-900/80 rounded-2xl border border-zinc-800/50 text-sm flex flex-col gap-4">
+      <div className="flex justify-between items-center mb-2 font-medium text-zinc-400">
         <span className="text-xs uppercase tracking-wider font-semibold">User Info - Thông tin người dùng</span>
         {currentUserId === user.id ? (
           <UpdateUser user={user} />
         ) : (
-          <MoreVertical className="w-4 h-4 cursor-pointer hover:text-zinc-700 dark:hover:text-zinc-300 transition-colors" />
+          <MoreVertical className="w-4 h-4 cursor-pointer hover:text-zinc-300 transition-colors" />
         )}
       </div>
 
-      {/* BOTTOM */}
-      <div className="flex flex-col gap-4 text-zinc-600 dark:text-zinc-300">
+      <div className="flex flex-col gap-4 text-zinc-300">
         <div className="flex items-center gap-2">
-          <span className="text-xl text-zinc-900 dark:text-zinc-100 font-medium">
+          <span className="text-xl text-white font-medium">
             {user.name && user.surname ? `${user.name} ${user.surname}` : user.username}
           </span>
-          <span className="text-sm text-zinc-500 dark:text-zinc-400">@{user.username}</span>
+          <span className="text-sm text-zinc-400">@{user.username}</span>
         </div>
 
         {user.description && <p className="leading-relaxed">{user.description}</p>}
 
         {user.city && (
-          <div className="flex items-center gap-2 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors group">
-            <MapPin className="w-4 h-4 group-hover:scale-110 transition-transform" />
+          <div className="flex items-center gap-2 hover:text-zinc-200 transition-colors">
+            <MapPin className="w-4 h-4" />
             <span>
-              Sống tại <b className="text-zinc-800 dark:text-zinc-200">{user.city}</b>
+              Sống tại <b className="text-white">{user.city}</b>
             </span>
           </div>
         )}
 
         {user.school && (
-          <div className="flex items-center gap-2 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors group">
-            <GraduationCap className="w-4 h-4 group-hover:scale-110 transition-transform" />
+          <div className="flex items-center gap-2 hover:text-zinc-200 transition-colors">
+            <GraduationCap className="w-4 h-4" />
             <span>
-              Đã tốt nghiệp tại <b className="text-zinc-800 dark:text-zinc-200">{user.school}</b>
+              Đã tốt nghiệp tại <b className="text-white">{user.school}</b>
             </span>
           </div>
         )}
 
         {user.work && (
-          <div className="flex items-center gap-2 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors group">
-            <Briefcase className="w-4 h-4 group-hover:scale-110 transition-transform" />
+          <div className="flex items-center gap-2 hover:text-zinc-200 transition-colors">
+            <Briefcase className="w-4 h-4" />
             <span>
-              Làm việc tại <b className="text-zinc-800 dark:text-zinc-200">{user.work}</b>
+              Làm việc tại <b className="text-white">{user.work}</b>
             </span>
           </div>
         )}
 
         {user.website && (
-          <div className="flex gap-1 items-center group hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">
-            <LinkIcon className="w-4 h-4 group-hover:scale-110 transition-transform" />
+          <div className="flex gap-1 items-center hover:text-zinc-200 transition-colors">
+            <LinkIcon className="w-4 h-4" />
             <Link
               href={user.website}
-              className="text-emerald-600 hover:text-emerald-500 dark:text-emerald-400 dark:hover:text-emerald-300 transition-colors font-medium"
+              className="text-zinc-300 hover:text-white transition-colors font-medium"
             >
               {user.website}
             </Link>
@@ -134,14 +132,14 @@ const UserInfoCard = async ({ user }: { user: User }) => {
         )}
         
         {user.birthDate && (
-          <div className="flex gap-1 items-center text-xs text-zinc-500 dark:text-zinc-400 group hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">
-            <Cake className="w-4 h-4 group-hover:scale-110 transition-transform" />
-            <span>Sinh ngày <b className="text-zinc-800 dark:text-zinc-200">{formattedBirthDate}</b></span>
+          <div className="flex gap-1 items-center text-xs text-zinc-400 hover:text-zinc-300 transition-colors">
+            <Cake className="w-4 h-4" />
+            <span>Sinh ngày <b className="text-white">{formattedBirthDate}</b></span>
           </div>
         )}
         
-        <div className="flex gap-1 items-center text-xs text-zinc-500 dark:text-zinc-400 group hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">
-          <CalendarDays className="w-4 h-4 group-hover:scale-110 transition-transform" />
+        <div className="flex gap-1 items-center text-xs text-zinc-400 hover:text-zinc-300 transition-colors">
+          <CalendarDays className="w-4 h-4" />
           <span>Đã tham gia {formattedDate}</span>
         </div>
 

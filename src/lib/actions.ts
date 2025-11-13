@@ -590,13 +590,25 @@ export const deleteStory = async (storyId: number) => {
   }
 };
 
-// Update only avatar URL for current user
 export async function updateUserAvatar(avatarUrl: string) {
   const { userId } = await auth();
   if (!userId) {
     throw new Error("Unauthorized");
   }
-  try {
+    try {
+      const existingUser = await prisma.user.findUnique({
+      where: { id: userId },
+      select: { id: true }
+    });
+    
+    if (!existingUser) {
+      console.warn(`User ${userId} not found in database. Cannot update avatar.`);
+      return { 
+        success: false, 
+        error: "User not found in database. Please ensure you have completed sign up." 
+      };
+    }
+    
     await prisma.user.update({
       where: { id: userId },
       data: { avatar: avatarUrl },
@@ -714,7 +726,6 @@ export const searchContent = async (query: string) => {
   }
 };
 
-// Thêm hàm này để đồng bộ hóa avatar người dùng từ Clerk vào cơ sở dữ liệu
 export async function synchronizeUserAvatar() {
   const { userId } = await auth();
   
@@ -723,20 +734,35 @@ export async function synchronizeUserAvatar() {
   }
   
   try {
-    // Lấy người dùng hiện tại từ Clerk
     const user = await currentUser();
     
     if (!user) {
-      throw new Error("User not found");
+      throw new Error("User not found in Clerk");
     }
     
-    // Cập nhật avatar trong cơ sở dữ liệu với imageUrl hiện tại từ Clerk
+    const existingUser = await prisma.user.findUnique({
+      where: { id: userId },
+      select: { id: true }
+    });
+    
+    if (!existingUser) {
+      console.warn(`User ${userId} not found in database. Cannot sync avatar.`);
+      return { 
+        success: false, 
+        error: "User not found in database. Please ensure you have completed sign up." 
+      };
+    }
+    
+    if (!user.imageUrl) {
+      console.log("User has no avatar in Clerk, skipping sync");
+      return { success: true, message: "No avatar to sync" };
+    }
+    
     await prisma.user.update({
       where: { id: userId },
       data: { avatar: user.imageUrl }
     });
     
-    // Cập nhật tất cả các trang nơi avatar có thể được hiển thị
     revalidatePath("/", "layout");
     revalidatePath("/profile/[username]", "layout");
     revalidatePath("/settings", "layout");

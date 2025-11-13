@@ -5,44 +5,40 @@ import { useEffect, useState } from "react";
 import { useRouter } from 'next/navigation';
 import { synchronizeUserAvatar } from "@/lib/actions";
 
-// Component này không hiển thị gì nhưng giúp xử lý làm mới avatar
 export default function AvatarRefresh() {
   const { user, isLoaded } = useUser();
   const router = useRouter();
   const [prevImageUrl, setPrevImageUrl] = useState('');
   const [syncInProgress, setSyncInProgress] = useState(false);
   
-  // Theo dõi các thay đổi đối với avatar Clerk
   useEffect(() => {
     if (!user || !isLoaded || syncInProgress) return;
     
-    // Kiểm tra xem người dùng có avatar hay không
-    // Nếu không có imageUrl hoặc imageUrl rỗng, không thực hiện đồng bộ
     if (!user.imageUrl || user.imageUrl === '') {
       console.log("User has no avatar image, skipping sync");
       return;
     }
     
-    // Chỉ kích hoạt làm mới nếu URL hình ảnh đã thay đổi
     if (user.imageUrl && user.imageUrl !== prevImageUrl) {
       console.log("Avatar image URL changed, syncing with database...");
       setPrevImageUrl(user.imageUrl);
       setSyncInProgress(true);
       
-      // Tự động đồng bộ hóa với cơ sở dữ liệu khi avatar thay đổi
       synchronizeUserAvatar().then((result) => {
         if (result.success) {
           console.log("Avatar synchronized successfully");
           
-          // Buộc server component làm mới sau khi đồng bộ thành công
           const timeout = setTimeout(() => {
-            // Làm mới route hiện tại
             router.refresh();
           }, 500);
           
           return () => clearTimeout(timeout);
         } else {
-          console.error("Failed to sync avatar:", result.error);
+          if (result.error && !result.error.includes("not found in database")) {
+            console.error("Failed to sync avatar:", result.error);
+          } else {
+            console.log("Avatar sync skipped:", result.error || "No avatar to sync");
+          }
         }
       }).catch(error => {
         console.error("Error during avatar sync:", error);
@@ -52,6 +48,5 @@ export default function AvatarRefresh() {
     }
   }, [user, isLoaded, prevImageUrl, router, syncInProgress]);
   
-  // Component này không hiển thị bất kỳ thứ gì nhìn thấy được
   return null;
 } 
