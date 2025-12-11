@@ -24,7 +24,7 @@ A fully functional community platform with multiple features built with NextJS.
 - **Smart Captions** - AI-generated captions for uploaded images
 - **Content Summarization** - AI-powered content summarization
 - **Multi-language Translation** - Real-time translation support
-- **AI Assistant** - Integrated chatbot for user assistance
+- **AI Assistant**
 
 ## Technology Stack
 
