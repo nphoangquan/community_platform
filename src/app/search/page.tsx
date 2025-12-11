@@ -4,13 +4,16 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, Search } from "lucide-react";
+import { useAuth } from "@clerk/nextjs";
 
 export default function SearchPage() {
   const [query, setQuery] = useState("");
   const router = useRouter();
+  const { isSignedIn } = useAuth();
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
+    if (!isSignedIn) return;
     if (query.trim().length >= 2) {
       router.push(`/search/results?q=${encodeURIComponent(query)}`);
     }
@@ -28,31 +31,45 @@ export default function SearchPage() {
         </div>
         
         {/* Search Form */}
-        <form onSubmit={handleSearch} className="w-full mb-8">
-          <div className="flex p-3 bg-zinc-800/50 items-center rounded-xl border border-zinc-700/50 hover:bg-zinc-800/70 transition-colors group">
-            <input 
-              type="text" 
-              placeholder="Search people or posts..." 
-              className="bg-transparent outline-none text-zinc-300 placeholder-zinc-500 w-full"
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              autoFocus
-            />
-            <button 
-              type="submit" 
-              className="text-zinc-500 hover:text-zinc-300 transition-colors"
-              aria-label="Search"
+        {!isSignedIn ? (
+          <div className="text-center py-12 mb-8">
+            <p className="text-zinc-400 text-lg mb-4">Vui lòng đăng nhập để sử dụng tính năng tìm kiếm</p>
+            <Link 
+              href="/sign-in" 
+              className="inline-block px-6 py-2 bg-emerald-500 hover:bg-emerald-600 text-white rounded-lg transition-colors"
             >
-              <Search className="w-5 h-5" />
-            </button>
+              Đăng nhập
+            </Link>
           </div>
-        </form>
-        
-        {/* Instructions */}
-        <div className="text-zinc-400 text-center mt-8">
-          <p>Tìm kiếm người dùng hoặc bài viết</p>
-          <p className="text-sm mt-2">Thử gõ tên, tên người dùng, hoặc từ khóa từ bài viết</p>
-        </div>
+        ) : (
+          <>
+            <form onSubmit={handleSearch} className="w-full mb-8">
+              <div className="flex p-3 bg-zinc-800/50 items-center rounded-xl border border-zinc-700/50 hover:bg-zinc-800/70 transition-colors group">
+                <input 
+                  type="text" 
+                  placeholder="Search people or posts..." 
+                  className="bg-transparent outline-none text-zinc-300 placeholder-zinc-500 w-full"
+                  value={query}
+                  onChange={(e) => setQuery(e.target.value)}
+                  autoFocus
+                />
+                <button 
+                  type="submit" 
+                  className="text-zinc-500 hover:text-zinc-300 transition-colors"
+                  aria-label="Search"
+                >
+                  <Search className="w-5 h-5" />
+                </button>
+              </div>
+            </form>
+            
+            {/* Instructions */}
+            <div className="text-zinc-400 text-center mt-8">
+              <p>Tìm kiếm người dùng hoặc bài viết</p>
+              <p className="text-sm mt-2">Thử gõ tên, tên người dùng, hoặc từ khóa từ bài viết</p>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );

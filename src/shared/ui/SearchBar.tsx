@@ -7,6 +7,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { debounce } from "lodash";
 import { useRouter } from "next/navigation";
+import { useAuth } from "@clerk/nextjs";
 
 interface User { id: string; username: string; name: string | null; surname: string | null; avatar: string | null; }
 interface Post { id: number; desc: string; user: { id: string; username: string; name: string | null; avatar: string | null; role?: string; }; }
@@ -19,8 +20,14 @@ export default function SearchBar() {
   const [isLoading, setIsLoading] = useState(false);
   const searchRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
+  const { isSignedIn } = useAuth();
 
   const debouncedSearch = useCallback((searchQuery: string) => {
+    if (!isSignedIn) {
+      setSearchResults({ users: [], posts: [] });
+      setIsLoading(false);
+      return;
+    }
     if (searchQuery.trim().length < 2) {
       setSearchResults({ users: [], posts: [] });
       setIsLoading(false);
@@ -32,9 +39,10 @@ export default function SearchBar() {
       catch (error) { console.error("Search failed:", error); }
       finally { setIsLoading(false); }
     }, 500)(searchQuery);
-  }, []);
+  }, [isSignedIn]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!isSignedIn) return;
     const value = e.target.value; setQuery(value);
     if (value.trim().length >= 2) debouncedSearch(value); else setSearchResults({ users: [], posts: [] });
   };
@@ -62,8 +70,13 @@ export default function SearchBar() {
     <div ref={searchRef} className="relative">
       <div className='flex p-2.5 bg-zinc-800/50 items-center rounded-xl border border-zinc-700/50 hover:bg-zinc-800/70 transition-colors group'>
         <input 
-          type="text" placeholder="Tìm kiếm..." className="bg-transparent outline-none text-zinc-300 placeholder-zinc-500 w-48"
-          value={query} onChange={handleInputChange} onFocus={() => setIsSearchOpen(true)}
+          type="text" 
+          placeholder={isSignedIn ? "Tìm kiếm..." : "Đăng nhập để tìm kiếm"} 
+          className="bg-transparent outline-none text-zinc-300 placeholder-zinc-500 w-48 disabled:cursor-not-allowed disabled:opacity-50"
+          value={query} 
+          onChange={handleInputChange} 
+          onFocus={() => isSignedIn && setIsSearchOpen(true)}
+          disabled={!isSignedIn}
         />
         {query ? (
           <X className="w-4 h-4 text-zinc-500 hover:text-zinc-300 cursor-pointer" onClick={() => { setQuery(""); setSearchResults({ users: [], posts: [] }); }} />
@@ -73,7 +86,14 @@ export default function SearchBar() {
       </div>
       {isSearchOpen && (query.trim().length >= 2 || hasResults) && (
         <div className="absolute mt-2 w-80 max-h-[80vh] overflow-y-auto bg-zinc-800 border border-zinc-700 rounded-lg shadow-lg z-50">
-          {isLoading ? (
+          {!isSignedIn ? (
+            <div className="p-4 text-center text-zinc-400">
+              <p className="mb-2">Vui lòng đăng nhập để sử dụng tính năng tìm kiếm</p>
+              <Link href="/sign-in" className="text-emerald-400 hover:text-emerald-300 underline">
+                Đăng nhập
+              </Link>
+            </div>
+          ) : isLoading ? (
             <div className="p-4 text-center text-zinc-400">
               <div className="inline-block h-4 w-4 animate-spin rounded-full border-2 border-zinc-600 border-solid border-current border-e-transparent align-[-0.125em] text-surface motion-reduce:animate-[spin_1.5s_linear_infinite] mr-2" />
               Đang tìm kiếm...

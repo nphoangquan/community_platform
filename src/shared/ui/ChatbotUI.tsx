@@ -13,7 +13,7 @@ export function ChatbotWelcome({ suggestions, onSuggestionClick }: ChatbotWelcom
   return (
     <div className="flex flex-col items-center justify-center h-full space-y-4 px-6 text-center">
       <div className="w-16 h-16 rounded-full bg-gradient-to-br from-emerald-600/20 to-emerald-700/20 flex items-center justify-center">
-        <Image src="/introvertia-icon.png" alt="Commun Logo" width={32} height={32} className="opacity-80" />
+        <Image src="/main-icon.png" alt="Commun Logo" width={32} height={32} className="opacity-80" />
       </div>
       <div>
         <h3 className="text-zinc-200 font-medium mb-1">Tôi là trợ lý AI.</h3>

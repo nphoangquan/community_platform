@@ -6,6 +6,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowLeft } from "lucide-react";
 import { searchContent } from "@/lib/actions";
+import { useAuth } from "@clerk/nextjs";
 
 interface User {
   id: string;
@@ -39,9 +40,15 @@ export function SearchResults() {
   const [results, setResults] = useState<SearchResultsData>({ users: [], posts: [] });
   const [isLoading, setIsLoading] = useState(true);
   const [activeTab, setActiveTab] = useState<"all" | "people" | "posts">("all");
+  const { isSignedIn } = useAuth();
 
   useEffect(() => {
     const fetchResults = async () => {
+      if (!isSignedIn) {
+        setResults({ users: [], posts: [] });
+        setIsLoading(false);
+        return;
+      }
       if (query.trim().length < 2) {
         setResults({ users: [], posts: [] });
         setIsLoading(false);
@@ -60,7 +67,7 @@ export function SearchResults() {
     };
 
     fetchResults();
-  }, [query]);
+  }, [query, isSignedIn]);
 
   // Lọc
   const displayUsers = activeTab === "all" || activeTab === "people" ? results.users : [];
@@ -114,7 +121,17 @@ export function SearchResults() {
         </div>
 
         {/* Results */}
-        {isLoading ? (
+        {!isSignedIn ? (
+          <div className="text-center py-12">
+            <p className="text-zinc-400 text-lg mb-4">Vui lòng đăng nhập để sử dụng tính năng tìm kiếm</p>
+            <Link 
+              href="/sign-in" 
+              className="inline-block px-6 py-2 bg-emerald-500 hover:bg-emerald-600 text-white rounded-lg transition-colors"
+            >
+              Đăng nhập
+            </Link>
+          </div>
+        ) : isLoading ? (
           <div className="flex justify-center items-center h-64">
             <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-zinc-600 border-solid border-current border-e-transparent align-[-0.125em] text-surface motion-reduce:animate-[spin_1.5s_linear_infinite]" />
           </div>

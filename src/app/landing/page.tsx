@@ -23,7 +23,7 @@ export default function LandingPage() {
           <div className="flex items-center gap-2 group">
             <div className="relative w-10 h-10 rounded-md overflow-hidden transition-transform duration-500 group-hover:scale-110">
               <Image
-                src="/introvertia-icon.png"
+                src="/main-icon.png"
                 alt="Commun Logo"
                 fill
                 className="object-cover transition-all duration-700"
@@ -105,7 +105,7 @@ export default function LandingPage() {
           <div className="flex-1 relative">
             <div className="relative z-10 rounded-2xl overflow-hidden transform transition-all duration-700 hover:scale-[1.03] hover:-rotate-1">
               <Image
-                src="/itv_second.png"
+                src="/bg-2.png"
                 alt="Commun App Interface"
                 width={600}
                 height={600}
@@ -201,7 +201,7 @@ export default function LandingPage() {
             <div className="order-1 md:order-2 relative">
               <div className="relative z-10 rounded-2xl overflow-hidden transform transition-all duration-700 hover:scale-[1.03] hover:rotate-1">
                 <Image
-                  src="/itv_first.png"
+                  src="/bg-1.png"
                   alt="How Commun Works"
                   width={600}
                   height={600}
@@ -301,7 +301,7 @@ export default function LandingPage() {
             <div className="flex items-center gap-2 mb-6 group">
               <div className="relative w-10 h-10 rounded-md overflow-hidden transition-transform duration-500 group-hover:scale-110">
                 <Image
-                  src="/introvertia-icon.png"
+                  src="/main-icon.png"
                   alt="Commun Logo"
                   fill
                   className="object-cover transition-all duration-700"

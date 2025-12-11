@@ -675,7 +675,8 @@ export const searchContent = async (query: string) => {
   const { userId } = await auth();
 
   if (!userId) {
-    throw new Error("User is not authenticated!");
+    // Return empty results instead of throwing error
+    return { users: [], posts: [] };
   }
 
   try {

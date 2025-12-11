@@ -14,11 +14,11 @@ const Ad = ({ size }: { size: "sm" | "md" | "lg" }) => {
           <div className={`relative w-full overflow-hidden ${
             size === "sm" ? "h-32" : size === "md" ? "h-40" : "h-52"
           }`}>
-            <Image src="/itv_second.png" alt="Commun Ad" fill className="object-cover hover:scale-105 transition-transform duration-500" />
+            <Image src="/bg-2.png" alt="Commun Ad" fill className="object-cover hover:scale-105 transition-transform duration-500" />
           </div>
           <div className="flex items-center gap-3 px-4">
             <div className="relative w-8 h-8 rounded-md overflow-hidden">
-              <Image src="/introvertia-icon.png" alt="Commun Logo" fill className="object-cover" />
+              <Image src="/main-icon.png" alt="Commun Logo" fill className="object-cover" />
             </div>
             <div className="flex flex-col">
               <span className="text-zinc-100 font-medium">COMMUN</span>

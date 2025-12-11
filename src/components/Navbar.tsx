@@ -84,7 +84,7 @@ const Navbar = ({ logoFont }: NavbarProps) => {
         <Link href="/" className="flex items-center gap-2">
           <div className="relative h-8 w-8">
             <Image
-              src="/introvertia-icon.png"
+              src="/main-icon.png"
               alt="Commun"
               fill
               className="object-contain"
