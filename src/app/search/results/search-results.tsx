@@ -40,10 +40,15 @@ export function SearchResults() {
   const [results, setResults] = useState<SearchResultsData>({ users: [], posts: [] });
   const [isLoading, setIsLoading] = useState(true);
   const [activeTab, setActiveTab] = useState<"all" | "people" | "posts">("all");
-  const { isSignedIn } = useAuth();
+  const { isSignedIn, isLoaded } = useAuth();
 
   useEffect(() => {
     const fetchResults = async () => {
+      if (!isLoaded) {
+        // Keep loading state while Clerk is initializing
+        setIsLoading(true);
+        return;
+      }
       if (!isSignedIn) {
         setResults({ users: [], posts: [] });
         setIsLoading(false);
@@ -67,7 +72,7 @@ export function SearchResults() {
     };
 
     fetchResults();
-  }, [query, isSignedIn]);
+  }, [query, isSignedIn, isLoaded]);
 
   // Lọc
   const displayUsers = activeTab === "all" || activeTab === "people" ? results.users : [];
@@ -121,7 +126,11 @@ export function SearchResults() {
         </div>
 
         {/* Results */}
-        {!isSignedIn ? (
+        {!isLoaded || isLoading ? (
+          <div className="flex justify-center items-center h-64">
+            <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-zinc-600 border-solid border-current border-e-transparent align-[-0.125em] text-surface motion-reduce:animate-[spin_1.5s_linear_infinite]" />
+          </div>
+        ) : !isSignedIn ? (
           <div className="text-center py-12">
             <p className="text-zinc-400 text-lg mb-4">Vui lòng đăng nhập để sử dụng tính năng tìm kiếm</p>
             <Link 
@@ -130,10 +139,6 @@ export function SearchResults() {
             >
               Đăng nhập
             </Link>
-          </div>
-        ) : isLoading ? (
-          <div className="flex justify-center items-center h-64">
-            <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-zinc-600 border-solid border-current border-e-transparent align-[-0.125em] text-surface motion-reduce:animate-[spin_1.5s_linear_infinite]" />
           </div>
         ) : (
           <div>
